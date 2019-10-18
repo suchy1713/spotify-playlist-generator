@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -17,7 +18,8 @@ import { PopoverModule } from 'ngx-bootstrap/popover';
    imports: [
       BrowserModule,
       AppRoutingModule,
-      PopoverModule.forRoot()
+      PopoverModule.forRoot(),
+      FormsModule
    ],
    providers: [],
    bootstrap: [

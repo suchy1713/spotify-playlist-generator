@@ -1,6 +1,6 @@
 <div class="container" id="body">
 <h2 class="text-center">Generate your playlist!</h2>
-<form>
+<form #paramsForm="ngForm" (ngSubmit)="sendForm()">
 
   <fieldset>
     <legend>
@@ -11,7 +11,7 @@
       </button>
     </legend>
     <div class="form-group">
-      <input type="number" class="form-control" name="limit" id="limit" min="0" max="100" value="20"/>
+      <input type="number" class="form-control" name="limit" id="limit" min="0" max="100" value="20" required [(ngModel)]="model.limit"/>
     </div>
   </fieldset>
 
@@ -28,13 +28,13 @@
       <div class="col-6">
         <div class="form-group">
           <label for="min_acousticness">MIN</label>
-          <input type="number" class="form-control" name="min_acousticness" id="min_acousticness" min="0" max="1" step="0.01" value="0"/>
+          <input type="number" class="form-control" name="min_acousticness" id="min_acousticness" min="0" max="1" step="0.01" value="0" required [(ngModel)]="model.min_acousticness"/>
         </div>
       </div>
       <div class="col-6">
         <div class="form-group">
           <label for="max_acousticness">MAX</label>
-          <input type="number" class="form-control" name="max_acousticness" id="max_acousticness" min="0" max="1" step="0.01" value="1"/>
+          <input type="number" class="form-control" name="max_acousticness" id="max_acousticness" min="0" max="1" step="0.01" value="1" required [(ngModel)]="model.max_acousticness"/>
         </div>
       </div>
     </div>
@@ -54,13 +54,13 @@
       <div class="col-6">
         <div class="form-group">
           <label for="min_danceability">MIN</label>
-          <input type="number" class="form-control" name="min_danceability" id="min_danceability" min="0" max="1" step="0.01" value="0"/>
+          <input type="number" class="form-control" name="min_danceability" id="min_danceability" min="0" max="1" step="0.01" value="0" required [(ngModel)]="model.min_danceability"/>
         </div>
       </div>
       <div class="col-6">
         <div class="form-group">
           <label for="max_danceability">MAX</label>
-          <input type="number" class="form-control" name="max_danceability" id="max_danceability" min="0" max="1" step="0.01" value="1"/>
+          <input type="number" class="form-control" name="max_danceability" id="max_danceability" min="0" max="1" step="0.01" value="1" required [(ngModel)]="model.max_danceability"/>
         </div>
       </div>
     </div>
@@ -82,13 +82,13 @@
       <div class="col-6">
         <div class="form-group">
           <label for="min_energy">MIN</label>
-          <input type="number" class="form-control" name="min_energy" id="min_energy" min="0" max="1" step="0.01" value="0"/>
+          <input type="number" class="form-control" name="min_energy" id="min_energy" min="0" max="1" step="0.01" value="0" required [(ngModel)]="model.min_energy"/>
         </div>
       </div>
       <div class="col-6">
         <div class="form-group">
           <label for="max_energy">MAX</label>
-          <input type="number" class="form-control" name="max_energy" id="max_energy" min="0" max="1" step="0.01" value="1"/>
+          <input type="number" class="form-control" name="max_energy" id="max_energy" min="0" max="1" step="0.01" value="1" required [(ngModel)]="model.max_energy"/>
         </div>
       </div>
     </div>
@@ -110,13 +110,13 @@
       <div class="col-6">
         <div class="form-group">
           <label for="min_instrumentalness">MIN</label>
-          <input type="number" class="form-control" name="min_instrumentalness" id="min_instrumentalness" min="0" max="1" step="0.01" value="0"/>
+          <input type="number" class="form-control" name="min_instrumentalness" id="min_instrumentalness" min="0" max="1" step="0.01" value="0" required [(ngModel)]="model.min_instrumentalness"/>
         </div>
       </div>
       <div class="col-6">
         <div class="form-group">
           <label for="max_instrumentalness">MAX</label>
-          <input type="number" class="form-control" name="max_instrumentalness" id="max_instrumentalness" min="0" max="1" step="0.01" value="1"/>
+          <input type="number" class="form-control" name="max_instrumentalness" id="max_instrumentalness" min="0" max="1" step="0.01" value="1" required [(ngModel)]="model.max_instrumentalness"/>
         </div>
       </div>
     </div>
@@ -136,13 +136,13 @@
       <div class="col-6">
         <div class="form-group">
           <label for="min_liveness">MIN</label>
-          <input type="number" class="form-control" name="min_liveness" id="min_liveness" min="0" max="1" step="0.01" value="0"/>
+          <input type="number" class="form-control" name="min_liveness" id="min_liveness" min="0" max="1" step="0.01" value="0" required [(ngModel)]="model.min_liveness"/>
         </div>
       </div>
       <div class="col-6">
         <div class="form-group">
           <label for="max_liveness">MAX</label>
-          <input type="number" class="form-control" name="max_liveness" id="max_liveness" min="0" max="1" step="0.01" value="1"/>
+          <input type="number" class="form-control" name="max_liveness" id="max_liveness" min="0" max="1" step="0.01" value="1" required [(ngModel)]="model.max_liveness"/>
         </div>
       </div>
     </div>
@@ -162,13 +162,13 @@
       <div class="col-6">
         <div class="form-group">
           <label for="min_popularity">MIN</label>
-          <input type="number" class="form-control" name="min_popularity" id="min_popularity" min="0" max="100" step="1" value="0"/>
+          <input type="number" class="form-control" name="min_popularity" id="min_popularity" min="0" max="100" step="1" value="0" required [(ngModel)]="model.min_popularity"/>
         </div>
       </div>
       <div class="col-6">
         <div class="form-group">
           <label for="max_popularity">MAX</label>
-          <input type="number" class="form-control" name="max_popularity" id="max_popularity" min="0" max="100" step="1" value="100"/>
+          <input type="number" class="form-control" name="max_popularity" id="max_popularity" min="0" max="100" step="1" value="100" required [(ngModel)]="model.max_popularity"/>
         </div>
       </div>
     </div>
@@ -190,13 +190,13 @@
       <div class="col-6">
         <div class="form-group">
           <label for="min_speechiness">MIN</label>
-          <input type="number" class="form-control" name="min_speechiness" id="min_speechiness" min="0" max="1" step="0.01" value="0"/>
+          <input type="number" class="form-control" name="min_speechiness" id="min_speechiness" min="0" max="1" step="0.01" value="0" required [(ngModel)]="model.min_speechiness"/>
         </div>
       </div>
       <div class="col-6">
         <div class="form-group">
           <label for="max_speechiness">MAX</label>
-          <input type="number" class="form-control" name="max_speechiness" id="max_speechiness" min="0" max="1" step="0.01" value="1"/>
+          <input type="number" class="form-control" name="max_speechiness" id="max_speechiness" min="0" max="1" step="0.01" value="1" required [(ngModel)]="model.max_speechiness"/>
         </div>
       </div>
     </div>
@@ -216,13 +216,13 @@
       <div class="col-6">
         <div class="form-group">
           <label for="min_valence">MIN</label>
-          <input type="number" class="form-control" name="min_valence" id="min_valence" min="0" max="1" step="0.01" value="0"/>
+          <input type="number" class="form-control" name="min_valence" id="min_valence" min="0" max="1" step="0.01" value="0" required [(ngModel)]="model.min_valence"/>
         </div>
       </div>
       <div class="col-6">
         <div class="form-group">
           <label for="max_valence">MAX</label>
-          <input type="number" class="form-control" name="max_valence" id="max_valence" min="0" max="1" step="0.01" value="1"/>
+          <input type="number" class="form-control" name="max_valence" id="max_valence" min="0" max="1" step="0.01" value="1" required [(ngModel)]="model.max_valence"/>
         </div>
       </div>
     </div>
@@ -233,4 +233,8 @@
     <button type="reset" class="btn btn-danger btn-lg btn-wide">Reset</button>
   </div>
 </form>
+</div>
+
+<div *ngIf="sended()" class="container">
+  <h1>Your playlist will go here.</h1>
 </div>
