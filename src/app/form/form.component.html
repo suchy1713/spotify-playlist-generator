@@ -1,6 +1,7 @@
 <div class="container" id="body">
 <h2 class="text-center">Generate your playlist!</h2>
-<form #paramsForm="ngForm" (ngSubmit)="sendForm()">
+<form [formGroup]="paramsForm" (ngSubmit)="sendForm()">
+
 
   <fieldset>
     <legend>
@@ -11,7 +12,18 @@
       </button>
     </legend>
     <div class="form-group">
-      <input type="number" class="form-control" name="limit" id="limit" min="0" max="100" value="20" required [(ngModel)]="model.limit"/>
+      <input type="number" [ngClass]="{'is-invalid': paramsForm.get('limit').errors && paramsForm.get('limit').touched}"
+             formControlName="limit"
+              name="limit" id="limit" class="form-control" />
+      <div class="invalid-feedback" *ngIf="paramsForm.get('limit').hasError('required') && paramsForm.get('limit').touched">
+        Size is required.
+      </div>
+      <div class="invalid-feedback" *ngIf="paramsForm.get('limit').hasError('min') && paramsForm.get('limit').touched">
+        Size must be at least 1.
+      </div>
+      <div class="invalid-feedback" *ngIf="paramsForm.get('limit').hasError('max') && paramsForm.get('limit').touched">
+        Size cannot exceed 100.
+      </div>
     </div>
   </fieldset>
 
@@ -28,13 +40,45 @@
       <div class="col-6">
         <div class="form-group">
           <label for="min_acousticness">MIN</label>
-          <input type="number" class="form-control" name="min_acousticness" id="min_acousticness" min="0" max="1" step="0.01" value="0" required [(ngModel)]="model.min_acousticness"/>
+          <input type="number" [ngClass]="{'is-invalid': paramsForm.get('min_acousticness').errors && paramsForm.get('min_acousticness').touched
+                                                      || paramsForm.hasError('acousticness') && paramsForm.get('min_acousticness').touched}"
+             formControlName="min_acousticness"
+              name="limit" id="limit" class="form-control" />
+          <div class="invalid-feedback" *ngIf="paramsForm.get('min_acousticness').hasError('required') && paramsForm.get('min_acousticness').touched">
+            Min Acousticness is required.
+          </div>
+          <div class="invalid-feedback" *ngIf="paramsForm.get('min_acousticness').hasError('min') && paramsForm.get('min_acousticness').touched">
+            Min Acousticness must be at least 0.
+          </div>
+          <div class="invalid-feedback" *ngIf="paramsForm.get('min_acousticness').hasError('max') && paramsForm.get('min_acousticness').touched">
+            Min Acousticness cannot exceed 1.
+          </div>
+          <div class="invalid-feedback" *ngIf="paramsForm.hasError('acousticness') && !paramsForm.get('min_acousticness').hasError('required')
+                                                                                   && !paramsForm.get('max_acousticness').hasError('required')">
+            Min Acousticness cannot exceed Max Acousticness
+          </div>
         </div>
       </div>
       <div class="col-6">
         <div class="form-group">
           <label for="max_acousticness">MAX</label>
-          <input type="number" class="form-control" name="max_acousticness" id="max_acousticness" min="0" max="1" step="0.01" value="1" required [(ngModel)]="model.max_acousticness"/>
+          <input type="number" [ngClass]="{'is-invalid': paramsForm.get('max_acousticness').errors && paramsForm.get('max_acousticness').touched
+                                                      || paramsForm.hasError('acousticness') && paramsForm.get('min_acousticness').touched}"
+             formControlName="max_acousticness"
+              name="limit" id="limit" class="form-control" />
+          <div class="invalid-feedback" *ngIf="paramsForm.get('max_acousticness').hasError('required') && paramsForm.get('max_acousticness').touched">
+            Max Acousticness is required.
+          </div>
+          <div class="invalid-feedback" *ngIf="paramsForm.get('max_acousticness').hasError('min') && paramsForm.get('max_acousticness').touched">
+            Max Acousticness must be at least 0.
+          </div>
+          <div class="invalid-feedback" *ngIf="paramsForm.get('max_acousticness').hasError('max') && paramsForm.get('max_acousticness').touched">
+            Max Acousticness cannot exceed 1.
+          </div>
+          <div class="invalid-feedback" *ngIf="paramsForm.hasError('acousticness') && !paramsForm.get('min_acousticness').hasError('required')
+                                                                                   && !paramsForm.get('max_acousticness').hasError('required')">
+            Min Acousticness cannot exceed Max Acousticness
+          </div>
         </div>
       </div>
     </div>
@@ -54,13 +98,45 @@
       <div class="col-6">
         <div class="form-group">
           <label for="min_danceability">MIN</label>
-          <input type="number" class="form-control" name="min_danceability" id="min_danceability" min="0" max="1" step="0.01" value="0" required [(ngModel)]="model.min_danceability"/>
+          <input type="number" [ngClass]="{'is-invalid': paramsForm.get('min_danceability').errors && paramsForm.get('min_danceability').touched
+                                                      || paramsForm.hasError('danceability') && paramsForm.get('min_danceability').touched}"
+             formControlName="min_danceability"
+              name="limit" id="limit" class="form-control" />
+          <div class="invalid-feedback" *ngIf="paramsForm.get('min_danceability').hasError('required') && paramsForm.get('min_danceability').touched">
+            Min Danceability is required.
+          </div>
+          <div class="invalid-feedback" *ngIf="paramsForm.get('min_danceability').hasError('min') && paramsForm.get('min_danceability').touched">
+            Min Danceability must be at least 0.
+          </div>
+          <div class="invalid-feedback" *ngIf="paramsForm.get('min_danceability').hasError('max') && paramsForm.get('min_danceability').touched">
+            Min Danceability cannot exceed 1.
+          </div>
+          <div class="invalid-feedback" *ngIf="paramsForm.hasError('danceability') && !paramsForm.get('min_danceability').hasError('required')
+                                                                                   && !paramsForm.get('max_danceability').hasError('required')">
+            Min Danceability cannot exceed Max Danceability
+          </div>
         </div>
       </div>
       <div class="col-6">
         <div class="form-group">
           <label for="max_danceability">MAX</label>
-          <input type="number" class="form-control" name="max_danceability" id="max_danceability" min="0" max="1" step="0.01" value="1" required [(ngModel)]="model.max_danceability"/>
+          <input type="number" [ngClass]="{'is-invalid': paramsForm.get('max_danceability').errors && paramsForm.get('max_danceability').touched
+                                                      || paramsForm.hasError('danceability') && paramsForm.get('max_danceability').touched}"
+             formControlName="max_danceability"
+              name="limit" id="limit" class="form-control" />
+          <div class="invalid-feedback" *ngIf="paramsForm.get('max_danceability').hasError('required') && paramsForm.get('max_danceability').touched">
+            Max Danceability is required.
+          </div>
+          <div class="invalid-feedback" *ngIf="paramsForm.get('max_danceability').hasError('min') && paramsForm.get('max_danceability').touched">
+            Max Danceability must be at least 0.
+          </div>
+          <div class="invalid-feedback" *ngIf="paramsForm.get('max_danceability').hasError('max') && paramsForm.get('max_danceability').touched">
+            Max Danceability cannot exceed 1.
+          </div>
+          <div class="invalid-feedback" *ngIf="paramsForm.hasError('danceability') && !paramsForm.get('min_danceability').hasError('required')
+                                                                                   && !paramsForm.get('max_danceability').hasError('required')">
+            Min Danceability cannot exceed Max Danceability
+          </div>
         </div>
       </div>
     </div>
@@ -82,13 +158,45 @@
       <div class="col-6">
         <div class="form-group">
           <label for="min_energy">MIN</label>
-          <input type="number" class="form-control" name="min_energy" id="min_energy" min="0" max="1" step="0.01" value="0" required [(ngModel)]="model.min_energy"/>
+          <input type="number" [ngClass]="{'is-invalid': paramsForm.get('min_energy').errors && paramsForm.get('min_energy').touched
+                                                      || paramsForm.hasError('energy') && paramsForm.get('min_energy').touched}"
+             formControlName="min_energy"
+              name="limit" id="limit" class="form-control" />
+          <div class="invalid-feedback" *ngIf="paramsForm.get('min_energy').hasError('required') && paramsForm.get('min_energy').touched">
+            Min Energy is required.
+          </div>
+          <div class="invalid-feedback" *ngIf="paramsForm.get('min_energy').hasError('min') && paramsForm.get('min_energy').touched">
+            Min Energy must be at least 0.
+          </div>
+          <div class="invalid-feedback" *ngIf="paramsForm.get('min_energy').hasError('max') && paramsForm.get('min_energy').touched">
+            Min Energy cannot exceed 1.
+          </div>
+          <div class="invalid-feedback" *ngIf="paramsForm.hasError('energy') && !paramsForm.get('min_energy').hasError('required')
+                                                                                   && !paramsForm.get('max_energy').hasError('required')">
+            Min Energy cannot exceed Max Energy
+          </div>
         </div>
       </div>
       <div class="col-6">
         <div class="form-group">
           <label for="max_energy">MAX</label>
-          <input type="number" class="form-control" name="max_energy" id="max_energy" min="0" max="1" step="0.01" value="1" required [(ngModel)]="model.max_energy"/>
+          <input type="number" [ngClass]="{'is-invalid': paramsForm.get('max_energy').errors && paramsForm.get('max_energy').touched
+                                                      || paramsForm.hasError('energy') && paramsForm.get('max_energy').touched}"
+             formControlName="max_energy"
+              name="limit" id="limit" class="form-control" />
+          <div class="invalid-feedback" *ngIf="paramsForm.get('max_energy').hasError('required') && paramsForm.get('max_energy').touched">
+            Max Energy is required.
+          </div>
+          <div class="invalid-feedback" *ngIf="paramsForm.get('max_energy').hasError('min') && paramsForm.get('max_energy').touched">
+            Max Energy must be at least 0.
+          </div>
+          <div class="invalid-feedback" *ngIf="paramsForm.get('max_energy').hasError('max') && paramsForm.get('max_energy').touched">
+            Max Energy cannot exceed 1.
+          </div>
+          <div class="invalid-feedback" *ngIf="paramsForm.hasError('energy') && !paramsForm.get('min_energy').hasError('required')
+                                                                                   && !paramsForm.get('max_energy').hasError('required')">
+            Min Energy cannot exceed Max Energy
+          </div>
         </div>
       </div>
     </div>
@@ -110,13 +218,45 @@
       <div class="col-6">
         <div class="form-group">
           <label for="min_instrumentalness">MIN</label>
-          <input type="number" class="form-control" name="min_instrumentalness" id="min_instrumentalness" min="0" max="1" step="0.01" value="0" required [(ngModel)]="model.min_instrumentalness"/>
+          <input type="number" [ngClass]="{'is-invalid': paramsForm.get('min_instrumentalness').errors && paramsForm.get('min_instrumentalness').touched
+                                                      || paramsForm.hasError('instrumentalness') && paramsForm.get('min_instrumentalness').touched}"
+             formControlName="min_instrumentalness"
+              name="limit" id="limit" class="form-control" />
+          <div class="invalid-feedback" *ngIf="paramsForm.get('min_instrumentalness').hasError('required') && paramsForm.get('min_instrumentalness').touched">
+            Min Instrumentalness is required.
+          </div>
+          <div class="invalid-feedback" *ngIf="paramsForm.get('min_instrumentalness').hasError('min') && paramsForm.get('min_instrumentalness').touched">
+            Min Instrumentalness must be at least 0.
+          </div>
+          <div class="invalid-feedback" *ngIf="paramsForm.get('min_instrumentalness').hasError('max') && paramsForm.get('min_instrumentalness').touched">
+            Min Instrumentalness cannot exceed 1.
+          </div>
+          <div class="invalid-feedback" *ngIf="paramsForm.hasError('instrumentalness') && !paramsForm.get('min_instrumentalness').hasError('required')
+                                                                                   && !paramsForm.get('max_instrumentalness').hasError('required')">
+            Min Instrumentalness cannot exceed Max Instrumentalness
+          </div>
         </div>
       </div>
       <div class="col-6">
         <div class="form-group">
-          <label for="max_instrumentalness">MAX</label>
-          <input type="number" class="form-control" name="max_instrumentalness" id="max_instrumentalness" min="0" max="1" step="0.01" value="1" required [(ngModel)]="model.max_instrumentalness"/>
+          <label for="max_energy">MAX</label>
+          <input type="number" [ngClass]="{'is-invalid': paramsForm.get('max_instrumentalness').errors && paramsForm.get('max_instrumentalness').touched
+                                                      || paramsForm.hasError('instrumentalness') && paramsForm.get('max_instrumentalness').touched}"
+             formControlName="max_instrumentalness"
+              name="limit" id="limit" class="form-control" />
+          <div class="invalid-feedback" *ngIf="paramsForm.get('max_instrumentalness').hasError('required') && paramsForm.get('max_instrumentalness').touched">
+            Max Instrumentalness is required.
+          </div>
+          <div class="invalid-feedback" *ngIf="paramsForm.get('max_instrumentalness').hasError('min') && paramsForm.get('max_instrumentalness').touched">
+            Max Instrumentalness must be at least 0.
+          </div>
+          <div class="invalid-feedback" *ngIf="paramsForm.get('max_instrumentalness').hasError('max') && paramsForm.get('max_instrumentalness').touched">
+            Max Instrumentalness cannot exceed 1.
+          </div>
+          <div class="invalid-feedback" *ngIf="paramsForm.hasError('instrumentalness') && !paramsForm.get('min_instrumentalness').hasError('required')
+                                                                                   && !paramsForm.get('max_instrumentalness').hasError('required')">
+            Min Instrumentalness cannot exceed Max Instrumentalness
+          </div>
         </div>
       </div>
     </div>
@@ -136,13 +276,45 @@
       <div class="col-6">
         <div class="form-group">
           <label for="min_liveness">MIN</label>
-          <input type="number" class="form-control" name="min_liveness" id="min_liveness" min="0" max="1" step="0.01" value="0" required [(ngModel)]="model.min_liveness"/>
+          <input type="number" [ngClass]="{'is-invalid': paramsForm.get('min_liveness').errors && paramsForm.get('min_liveness').touched
+                                                      || paramsForm.hasError('liveness') && paramsForm.get('min_liveness').touched}"
+             formControlName="min_liveness"
+              name="limit" id="limit" class="form-control" />
+          <div class="invalid-feedback" *ngIf="paramsForm.get('min_liveness').hasError('required') && paramsForm.get('min_liveness').touched">
+            Min Liveness is required.
+          </div>
+          <div class="invalid-feedback" *ngIf="paramsForm.get('min_liveness').hasError('min') && paramsForm.get('min_liveness').touched">
+            Min Liveness must be at least 0.
+          </div>
+          <div class="invalid-feedback" *ngIf="paramsForm.get('min_liveness').hasError('max') && paramsForm.get('min_liveness').touched">
+            Min Liveness cannot exceed 1.
+          </div>
+          <div class="invalid-feedback" *ngIf="paramsForm.hasError('liveness') && !paramsForm.get('min_liveness').hasError('required')
+                                                                                   && !paramsForm.get('max_liveness').hasError('required')">
+            Min Liveness cannot exceed Max Liveness
+          </div>
         </div>
       </div>
       <div class="col-6">
         <div class="form-group">
-          <label for="max_liveness">MAX</label>
-          <input type="number" class="form-control" name="max_liveness" id="max_liveness" min="0" max="1" step="0.01" value="1" required [(ngModel)]="model.max_liveness"/>
+          <label for="max_energy">MAX</label>
+          <input type="number" [ngClass]="{'is-invalid': paramsForm.get('max_liveness').errors && paramsForm.get('max_liveness').touched
+                                                      || paramsForm.hasError('liveness') && paramsForm.get('max_liveness').touched}"
+             formControlName="max_liveness"
+              name="limit" id="limit" class="form-control" />
+          <div class="invalid-feedback" *ngIf="paramsForm.get('max_liveness').hasError('required') && paramsForm.get('max_liveness').touched">
+            Max Liveness is required.
+          </div>
+          <div class="invalid-feedback" *ngIf="paramsForm.get('max_liveness').hasError('min') && paramsForm.get('max_liveness').touched">
+            Max Liveness must be at least 0.
+          </div>
+          <div class="invalid-feedback" *ngIf="paramsForm.get('max_liveness').hasError('max') && paramsForm.get('max_liveness').touched">
+            Max Liveness cannot exceed 1.
+          </div>
+          <div class="invalid-feedback" *ngIf="paramsForm.hasError('liveness') && !paramsForm.get('min_liveness').hasError('required')
+                                                                                   && !paramsForm.get('max_liveness').hasError('required')">
+            Min Liveness cannot exceed Max Liveness
+          </div>
         </div>
       </div>
     </div>
@@ -162,13 +334,45 @@
       <div class="col-6">
         <div class="form-group">
           <label for="min_popularity">MIN</label>
-          <input type="number" class="form-control" name="min_popularity" id="min_popularity" min="0" max="100" step="1" value="0" required [(ngModel)]="model.min_popularity"/>
+          <input type="number" [ngClass]="{'is-invalid': paramsForm.get('min_popularity').errors && paramsForm.get('min_popularity').touched
+                                                      || paramsForm.hasError('popularity') && paramsForm.get('min_popularity').touched}"
+             formControlName="min_popularity"
+              name="limit" id="limit" class="form-control" />
+          <div class="invalid-feedback" *ngIf="paramsForm.get('min_popularity').hasError('required') && paramsForm.get('min_popularity').touched">
+            Min Popularity is required.
+          </div>
+          <div class="invalid-feedback" *ngIf="paramsForm.get('min_popularity').hasError('min') && paramsForm.get('min_popularity').touched">
+            Min Popularity must be at least 0.
+          </div>
+          <div class="invalid-feedback" *ngIf="paramsForm.get('min_popularity').hasError('max') && paramsForm.get('min_popularity').touched">
+            Min Popularity cannot exceed 1.
+          </div>
+          <div class="invalid-feedback" *ngIf="paramsForm.hasError('popularity') && !paramsForm.get('min_popularity').hasError('required')
+                                                                                   && !paramsForm.get('max_popularity').hasError('required')">
+            Min Popularity cannot exceed Max Popularity
+          </div>
         </div>
       </div>
       <div class="col-6">
         <div class="form-group">
-          <label for="max_popularity">MAX</label>
-          <input type="number" class="form-control" name="max_popularity" id="max_popularity" min="0" max="100" step="1" value="100" required [(ngModel)]="model.max_popularity"/>
+          <label for="max_energy">MAX</label>
+          <input type="number" [ngClass]="{'is-invalid': paramsForm.get('max_popularity').errors && paramsForm.get('max_popularity').touched
+                                                      || paramsForm.hasError('popularity') && paramsForm.get('max_popularity').touched}"
+             formControlName="max_popularity"
+              name="limit" id="limit" class="form-control" />
+          <div class="invalid-feedback" *ngIf="paramsForm.get('max_popularity').hasError('required') && paramsForm.get('max_popularity').touched">
+            Max Popularity is required.
+          </div>
+          <div class="invalid-feedback" *ngIf="paramsForm.get('max_popularity').hasError('min') && paramsForm.get('max_popularity').touched">
+            Max Popularity must be at least 0.
+          </div>
+          <div class="invalid-feedback" *ngIf="paramsForm.get('max_popularity').hasError('max') && paramsForm.get('max_popularity').touched">
+            Max Popularity cannot exceed 100.
+          </div>
+          <div class="invalid-feedback" *ngIf="paramsForm.hasError('popularity') && !paramsForm.get('min_popularity').hasError('required')
+                                                                                   && !paramsForm.get('max_popularity').hasError('required')">
+            Min Popularity cannot exceed Max Popularity
+          </div>
         </div>
       </div>
     </div>
@@ -190,13 +394,45 @@
       <div class="col-6">
         <div class="form-group">
           <label for="min_speechiness">MIN</label>
-          <input type="number" class="form-control" name="min_speechiness" id="min_speechiness" min="0" max="1" step="0.01" value="0" required [(ngModel)]="model.min_speechiness"/>
+          <input type="number" [ngClass]="{'is-invalid': paramsForm.get('min_speechiness').errors && paramsForm.get('min_speechiness').touched
+                                                      || paramsForm.hasError('speechiness') && paramsForm.get('min_speechiness').touched}"
+             formControlName="min_speechiness"
+              name="limit" id="limit" class="form-control" />
+          <div class="invalid-feedback" *ngIf="paramsForm.get('min_speechiness').hasError('required') && paramsForm.get('min_speechiness').touched">
+            Min Speechiness is required.
+          </div>
+          <div class="invalid-feedback" *ngIf="paramsForm.get('min_speechiness').hasError('min') && paramsForm.get('min_speechiness').touched">
+            Min Speechiness must be at least 0.
+          </div>
+          <div class="invalid-feedback" *ngIf="paramsForm.get('min_speechiness').hasError('max') && paramsForm.get('min_speechiness').touched">
+            Min Speechiness cannot exceed 1.
+          </div>
+          <div class="invalid-feedback" *ngIf="paramsForm.hasError('speechiness') && !paramsForm.get('min_speechiness').hasError('required')
+                                                                                   && !paramsForm.get('max_speechiness').hasError('required')">
+            Min Speechiness cannot exceed Max Speechiness
+          </div>
         </div>
       </div>
       <div class="col-6">
         <div class="form-group">
-          <label for="max_speechiness">MAX</label>
-          <input type="number" class="form-control" name="max_speechiness" id="max_speechiness" min="0" max="1" step="0.01" value="1" required [(ngModel)]="model.max_speechiness"/>
+          <label for="max_energy">MAX</label>
+          <input type="number" [ngClass]="{'is-invalid': paramsForm.get('max_speechiness').errors && paramsForm.get('max_speechiness').touched
+                                                      || paramsForm.hasError('speechiness') && paramsForm.get('max_speechiness').touched}"
+             formControlName="max_speechiness"
+              name="limit" id="limit" class="form-control" />
+          <div class="invalid-feedback" *ngIf="paramsForm.get('max_speechiness').hasError('required') && paramsForm.get('max_speechiness').touched">
+            Max Speechiness is required.
+          </div>
+          <div class="invalid-feedback" *ngIf="paramsForm.get('max_speechiness').hasError('min') && paramsForm.get('max_speechiness').touched">
+            Max Speechiness must be at least 0.
+          </div>
+          <div class="invalid-feedback" *ngIf="paramsForm.get('max_speechiness').hasError('max') && paramsForm.get('max_speechiness').touched">
+            Max Speechiness cannot exceed 1.
+          </div>
+          <div class="invalid-feedback" *ngIf="paramsForm.hasError('speechiness') && !paramsForm.get('min_speechiness').hasError('required')
+                                                                                   && !paramsForm.get('max_speechiness').hasError('required')">
+            Min Speechiness cannot exceed Max Speechiness
+          </div>
         </div>
       </div>
     </div>
@@ -216,20 +452,52 @@
       <div class="col-6">
         <div class="form-group">
           <label for="min_valence">MIN</label>
-          <input type="number" class="form-control" name="min_valence" id="min_valence" min="0" max="1" step="0.01" value="0" required [(ngModel)]="model.min_valence"/>
+          <input type="number" [ngClass]="{'is-invalid': paramsForm.get('min_valence').errors && paramsForm.get('min_valence').touched
+                                                      || paramsForm.hasError('valence') && paramsForm.get('min_valence').touched}"
+             formControlName="min_valence"
+              name="limit" id="limit" class="form-control" />
+          <div class="invalid-feedback" *ngIf="paramsForm.get('min_valence').hasError('required') && paramsForm.get('min_valence').touched">
+            Min Valence is required.
+          </div>
+          <div class="invalid-feedback" *ngIf="paramsForm.get('min_valence').hasError('min') && paramsForm.get('min_valence').touched">
+            Min Valence must be at least 0.
+          </div>
+          <div class="invalid-feedback" *ngIf="paramsForm.get('min_valence').hasError('max') && paramsForm.get('min_valence').touched">
+            Min Valence cannot exceed 1.
+          </div>
+          <div class="invalid-feedback" *ngIf="paramsForm.hasError('valence') && !paramsForm.get('min_valence').hasError('required')
+                                                                                   && !paramsForm.get('max_valence').hasError('required')">
+            Min Valence cannot exceed Max Valence
+          </div>
         </div>
       </div>
       <div class="col-6">
         <div class="form-group">
-          <label for="max_valence">MAX</label>
-          <input type="number" class="form-control" name="max_valence" id="max_valence" min="0" max="1" step="0.01" value="1" required [(ngModel)]="model.max_valence"/>
+          <label for="max_energy">MAX</label>
+          <input type="number" [ngClass]="{'is-invalid': paramsForm.get('max_valence').errors && paramsForm.get('max_valence').touched
+                                                      || paramsForm.hasError('valence') && paramsForm.get('max_valence').touched}"
+             formControlName="max_valence"
+              name="limit" id="limit" class="form-control" />
+          <div class="invalid-feedback" *ngIf="paramsForm.get('max_valence').hasError('required') && paramsForm.get('max_valence').touched">
+            Max Valence is required.
+          </div>
+          <div class="invalid-feedback" *ngIf="paramsForm.get('max_valence').hasError('min') && paramsForm.get('max_valence').touched">
+            Max Valence must be at least 0.
+          </div>
+          <div class="invalid-feedback" *ngIf="paramsForm.get('max_valence').hasError('max') && paramsForm.get('max_valence').touched">
+            Max Valence cannot exceed 1.
+          </div>
+          <div class="invalid-feedback" *ngIf="paramsForm.hasError('valence') && !paramsForm.get('min_valence').hasError('required')
+                                                                                   && !paramsForm.get('max_valence').hasError('required')">
+            Min Valence cannot exceed Max Valence
+          </div>
         </div>
       </div>
     </div>
   </fieldset>
 
   <div class="container text-center">
-    <button type="submit" id="sbm" class="btn btn-success btn-lg btn-wide">Generate</button>
+    <button type="submit" [disabled]="!paramsForm.valid" id="sbm" class="btn btn-success btn-lg btn-wide">Generate</button>
     <button type="reset" class="btn btn-danger btn-lg btn-wide">Reset</button>
   </div>
 </form>
