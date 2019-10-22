@@ -2,6 +2,57 @@
 <h2 class="text-center">Generate your playlist!</h2>
 <form [formGroup]="paramsForm" (ngSubmit)="sendForm()">
 
+  <fieldset>
+    <legend>
+      Genres (1-5)
+      <button type="button" class="btn mb-1" style="background-color:transparent" placement="right" popoverTitle="Genres (1-5)"
+      popover="Pick up to 5 genres." triggers="mouseenter:mouseleave">
+        <i class="fa fa-question-circle"></i>
+      </button>
+    </legend>
+    <div class="form-group">
+    <select multiple class="form-control select-big" formControlName="seed_genres" id="seed_genres" size="30"
+            [ngClass]="{'is-invalid': paramsForm.hasError('max_genres') && paramsForm.get('seed_genres').touched
+                                  || paramsForm.hasError('min_genres')}">
+      <option value="alt-rock">Alternative Rock</option>
+      <option value="alternative">Alternative</option>
+      <option value="black-metal">Black Metal</option>
+      <option value="blues">Blues</option>
+      <option value="classical">Classical</option>
+      <option value="club">Club</option>
+      <option value="comedy">Comedy</option>
+      <option value="country">Country</option>
+      <option value="disco">Disco</option>
+      <option value="emo">Emo</option>
+      <option value="folk">Folk</option>
+      <option value="funk">Funk</option>
+      <option value="grunge">Grunge</option>
+      <option value="hard-rock">Hard Rock</option>
+      <option value="heavy-metal">Heavy Metal</option>
+      <option value="hip-hop">Hip Hop</option>
+      <option value="indie">Indie</option>
+      <option value="indie-pop">Indie Pop</option>
+      <option value="jazz">Jazz</option>
+      <option value="metal">Metal</option>
+      <option value="pop">Pop</option>
+      <option value="psych-rock">Psychodelic Rock</option>
+      <option value="punk">Punk</option>
+      <option value="punk-rock">Punk Rock</option>
+      <option value="r-n-b">R N B</option>
+      <option value="reggae">Reggae</option>
+      <option value="rock">Rock</option>
+      <option value="rock-n-roll">Rock N Roll</option>
+      <option value="rockabilly">Rockabilly</option>
+      <option value="soul">Soul</option>
+    </select>
+      <div class="invalid-feedback" *ngIf="paramsForm.hasError('max_genres') && paramsForm.get('seed_genres').touched">
+        You cannot choose more than 5 genres.
+      </div>
+      <div class="invalid-feedback" *ngIf="paramsForm.hasError('min_genres')">
+        You have to pick at least 1 genre.
+      </div>
+    </div>
+  </fieldset>
 
   <fieldset>
     <legend>
@@ -490,6 +541,64 @@
           <div class="invalid-feedback" *ngIf="paramsForm.hasError('valence') && !paramsForm.get('min_valence').hasError('required')
                                                                                    && !paramsForm.get('max_valence').hasError('required')">
             Min Valence cannot exceed Max Valence
+          </div>
+        </div>
+      </div>
+    </div>
+  </fieldset>
+
+  <fieldset>
+    <legend>
+      Tempo (0-220)
+      <button type="button" class="btn mb-1" style="background-color:transparent" placement="right"triggers="mouseenter:mouseleave"
+      popoverTitle="Tempo (0-220)"
+      popover="The overall estimated tempo of a track in beats per minute (BPM). In musical terminology, tempo is the speed or pace 
+      of a given piece and derives directly from the average beat duration.">
+        <i class="fa fa-question-circle"></i>
+      </button>
+    </legend>
+    <div class="row">
+      <div class="col-6">
+        <div class="form-group">
+          <label for="min_tempo">MIN</label>
+          <input type="number" [ngClass]="{'is-invalid': paramsForm.get('min_tempo').errors && paramsForm.get('min_tempo').touched
+                                                      || paramsForm.hasError('tempo') && paramsForm.get('min_tempo').touched}"
+             formControlName="min_tempo"
+              name="limit" id="limit" class="form-control" />
+          <div class="invalid-feedback" *ngIf="paramsForm.get('min_tempo').hasError('required') && paramsForm.get('min_tempo').touched">
+            Min Tempo is required.
+          </div>
+          <div class="invalid-feedback" *ngIf="paramsForm.get('min_tempo').hasError('min') && paramsForm.get('min_tempo').touched">
+            Min Tempo must be at least 0.
+          </div>
+          <div class="invalid-feedback" *ngIf="paramsForm.get('min_tempo').hasError('max') && paramsForm.get('min_tempo').touched">
+            Min Tempo cannot exceed 1.
+          </div>
+          <div class="invalid-feedback" *ngIf="paramsForm.hasError('tempo') && !paramsForm.get('min_tempo').hasError('required')
+                                                                                   && !paramsForm.get('max_tempo').hasError('required')">
+            Min Tempo cannot exceed Max Tempo
+          </div>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="form-group">
+          <label for="max_energy">MAX</label>
+          <input type="number" [ngClass]="{'is-invalid': paramsForm.get('max_tempo').errors && paramsForm.get('max_tempo').touched
+                                                      || paramsForm.hasError('tempo') && paramsForm.get('max_tempo').touched}"
+             formControlName="max_tempo"
+              name="limit" id="limit" class="form-control" />
+          <div class="invalid-feedback" *ngIf="paramsForm.get('max_tempo').hasError('required') && paramsForm.get('max_tempo').touched">
+            Max Tempo is required.
+          </div>
+          <div class="invalid-feedback" *ngIf="paramsForm.get('max_tempo').hasError('min') && paramsForm.get('max_tempo').touched">
+            Max Tempo must be at least 0.
+          </div>
+          <div class="invalid-feedback" *ngIf="paramsForm.get('max_tempo').hasError('max') && paramsForm.get('max_tempo').touched">
+            Max Tempo cannot exceed 1.
+          </div>
+          <div class="invalid-feedback" *ngIf="paramsForm.hasError('tempo') && !paramsForm.get('min_tempo').hasError('required')
+                                                                                   && !paramsForm.get('max_tempo').hasError('required')">
+            Min Tempo cannot exceed Max Tempo
           </div>
         </div>
       </div>

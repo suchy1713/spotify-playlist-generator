@@ -15,6 +15,7 @@ export class FormComponent implements OnInit {
 
   ngOnInit() {
     this.paramsForm = this.fb.group({
+      seed_genres: ['', []],
       limit: [20, [Validators.required, Validators.min(1), Validators.max(100)]],
       min_acousticness: [0, [Validators.required, Validators.min(0), Validators.max(1)]],
       min_danceability: [0, [Validators.required, Validators.min(0), Validators.max(1)]],
@@ -24,6 +25,7 @@ export class FormComponent implements OnInit {
       min_popularity: [0, [Validators.required, Validators.min(0), Validators.max(1)]],
       min_speechiness: [0, [Validators.required, Validators.min(0), Validators.max(1)]],
       min_valence: [0, [Validators.required, Validators.min(0), Validators.max(1)]],
+      min_tempo: [0, [Validators.required, Validators.min(0), Validators.max(220)]],
       max_acousticness: [1, [Validators.required, Validators.min(0), Validators.max(1)]],
       max_danceability: [1, [Validators.required, Validators.min(0), Validators.max(1)]],
       max_energy: [1, [Validators.required, Validators.min(0), Validators.max(1)]],
@@ -31,7 +33,8 @@ export class FormComponent implements OnInit {
       max_liveness: [1, [Validators.required, Validators.min(0), Validators.max(1)]],
       max_popularity: [100, [Validators.required, Validators.min(0), Validators.max(100)]],
       max_speechiness: [1, [Validators.required, Validators.min(0), Validators.max(1)]],
-      max_valence: [1, [Validators.required, Validators.min(0), Validators.max(1)]]
+      max_valence: [1, [Validators.required, Validators.min(0), Validators.max(1)]],
+      max_tempo: [220, [Validators.required, Validators.min(0), Validators.max(220)]],
     }, { validator: this.minGreaterThanMaxValidator});
   }
 
@@ -69,6 +72,19 @@ export class FormComponent implements OnInit {
     if(g.get('min_valence').value > g.get('max_valence').value){
       errors.valence = true;
     }
+
+    if(g.get('min_tempo').value > g.get('max_tempo').value){
+      errors.tempo = true;
+    }
+
+    if(g.get('seed_genres').value.length < 1) {
+      errors.min_genres = true;
+    }
+
+    if(g.get('seed_genres').value.length > 5) {
+      errors.max_genres = true;
+    }
+
     return errors;
   }
 
