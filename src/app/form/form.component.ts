@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ApiAccessService } from '../_services/api-access.service';
 
 @Component({
   selector: 'app-form',
@@ -10,7 +11,9 @@ export class FormComponent implements OnInit {
   paramsForm: FormGroup;
   generated: boolean = false;
 
-  constructor(private fb: FormBuilder) {
+  songs: any;
+
+  constructor(private fb: FormBuilder, private apiAccessService: ApiAccessService) {
    }
 
   ngOnInit() {
@@ -94,6 +97,13 @@ export class FormComponent implements OnInit {
 
   sendForm(){
     console.log(this.paramsForm.value);
+
+    this.apiAccessService.GetSongs(this.paramsForm.value).subscribe((songs: any) => {
+      this.songs = songs;
+    }, error => {
+      console.log(error);
+    });
+
     this.generated = true;
   }
 
