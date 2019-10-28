@@ -613,5 +613,8 @@
 </div>
 
 <div *ngIf="sended()" class="container">
-  <pre>{{songs | json}}</pre>
+  <div class="row" *ngFor="let track of songs.tracks">
+    <ng-container *ngFor="let artist of track.artists">{{artist.name}} </ng-container> - 
+    {{track.name}}
+  </div>
 </div>

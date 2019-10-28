@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router, UrlSerializer } from '@angular/router';
+import { Observable } from 'rxjs';
+import { returnedPlaylist } from '../_models/returnedPlaylist';
 
 @Injectable({
   providedIn: 'root'
@@ -30,11 +32,11 @@ export class ApiAccessService {
     return this.http.get(this.url + 'authorize' + queryString);
   }
 
-  GetSongs(params: any){
+  GetSongs(params: any): Observable<returnedPlaylist>{
     var tree = this.router.createUrlTree([], { queryParams: params });
     var queryString = this.urlSerializer.serialize(tree).substring('/form'.length);
     console.log(queryString);
 
-    return this.http.get(this.apiUrl + 'recommendations' + queryString, this.options);
+    return this.http.get<returnedPlaylist>(this.apiUrl + 'recommendations' + queryString, this.options);
   }
 }
