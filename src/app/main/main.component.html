@@ -1,4 +1,4 @@
 <div class="container text-center" id="body">
     <button type="submit" id="sbm" (click)="connect()" class="btn btn-primary btn-lg btn-wide">1. Connect your account</button>
-    <button type="submit" id="sbm" routerLink="/form" class="btn btn-success btn-lg btn-wide">2. Generate playlist</button>
+    <button type="submit" id="sbm" routerLink="/form" [disabled]="!isConnected()" class="btn btn-success btn-lg btn-wide">2. Generate playlist</button>
 </div>

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ApiAccessService } from '../_services/api-access.service';
+import { TokenManagementService } from '../_services/token-management.service';
+import { NotificationService } from '../_services/notification.service';
 
 @Component({
   selector: 'app-form',
@@ -13,10 +15,15 @@ export class FormComponent implements OnInit {
 
   songs: any;
 
-  constructor(private fb: FormBuilder, private apiAccessService: ApiAccessService) {
+  constructor(private fb: FormBuilder, private apiAccessService: ApiAccessService, private token: TokenManagementService, private notification: NotificationService) {
    }
 
   ngOnInit() {
+    this.token.throwOutUser();
+    this.generateForm();
+  }
+
+  generateForm(){
     this.paramsForm = this.fb.group({
       seed_genres: ['', []],
       limit: [20, [Validators.required, Validators.min(1), Validators.max(100)]],
@@ -96,15 +103,12 @@ export class FormComponent implements OnInit {
   }
 
   sendForm(){
-    console.log(this.paramsForm.value);
-
     this.apiAccessService.GetSongs(this.paramsForm.value).subscribe((songs: any) => {
       this.songs = songs;
+      this.generated = true;
     }, error => {
-      console.log(error);
+      this.notification.error('Something went wrong. Try again.');
     });
-
-    this.generated = true;
   }
 
   sended(){

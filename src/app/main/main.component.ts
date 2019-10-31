@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiAccessService } from '../_services/api-access.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { TokenManagementService } from '../_services/token-management.service';
 
 @Component({
   selector: 'app-main',
@@ -9,15 +10,15 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class MainComponent implements OnInit {
 
-  constructor(private apiAccessService: ApiAccessService, private route: ActivatedRoute) { }
+  constructor(private apiAccessService: ApiAccessService, private route: ActivatedRoute, private token: TokenManagementService, private router: Router) { }
 
   ngOnInit() {
+    this.token.deleteTokenIfExpired();
     this.retrieveToken();
   }
 
   connect(){
-    this.apiAccessService.GetAccessToken().subscribe((token: any) => {
-      console.log(token);
+    this.apiAccessService.GetAccessToken().subscribe(() => {
     }, error => {
       console.log(error);
     });
@@ -26,9 +27,13 @@ export class MainComponent implements OnInit {
   retrieveToken(){
     this.route.fragment.subscribe((fragment: string) => {
       if(fragment){
-        localStorage.setItem('access-token', new URLSearchParams(fragment).get('access_token'));
-        localStorage.setItem('access-token-expires', String(new Date(new Date().getTime() + (1000 * 60 * 60))));
+        this.token.saveToken(new URLSearchParams(fragment).get('access_token'), String(new Date(new Date().getTime() + (1000 * 60 * 60))));
+        this.router.navigate(['/']);
       }
     });
+  }
+
+  isConnected(){
+    return this.token.exists();
   }
 }
