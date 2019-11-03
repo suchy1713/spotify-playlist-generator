@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router, UrlSerializer } from '@angular/router';
 import { Observable } from 'rxjs';
 import { returnedPlaylist } from '../_models/returnedPlaylist';
+import { User } from '../_models/user';
 
 @Injectable({
   providedIn: 'root'
@@ -38,5 +39,9 @@ export class ApiAccessService {
     console.log(queryString);
 
     return this.http.get<returnedPlaylist>(this.apiUrl + 'recommendations' + queryString, this.options);
+  }
+
+  GetUser() : Observable<User>{
+    return this.http.get<User>(this.apiUrl + 'me', this.options);
   }
 }

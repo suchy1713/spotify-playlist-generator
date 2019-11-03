@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ApiAccessService } from '../_services/api-access.service';
 import { TokenManagementService } from '../_services/token-management.service';
 import { NotificationService } from '../_services/notification.service';
+import { User } from '../_models/user';
 
 @Component({
   selector: 'app-form',
@@ -13,6 +14,7 @@ export class FormComponent implements OnInit {
   paramsForm: FormGroup;
   generated: boolean = false;
   clickedOnGenerate: boolean = false;
+  user: User;
 
   songs: any;
 
@@ -130,6 +132,16 @@ export class FormComponent implements OnInit {
 
   startOver(){
     this.ngOnInit();
+  }
+
+  addToSpotify(){
+    this.apiAccessService.GetUser().subscribe((user: User) => {
+      this.user = user;
+    }, error => {
+      this.notification.error('Something went wrong. Try again.');
+    }, () => {
+      console.log(this.user.id);
+    });
   }
 
 }
