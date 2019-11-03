@@ -12,6 +12,7 @@ import { NotificationService } from '../_services/notification.service';
 export class FormComponent implements OnInit {
   paramsForm: FormGroup;
   generated: boolean = false;
+  clickedOnGenerate: boolean = false;
 
   songs: any;
 
@@ -20,6 +21,9 @@ export class FormComponent implements OnInit {
 
   ngOnInit() {
     this.token.throwOutUser();
+    window.scrollTo(0, 0);
+    this.generated = false;
+    this.clickedOnGenerate = false;
     this.generateForm();
   }
 
@@ -98,14 +102,13 @@ export class FormComponent implements OnInit {
     return errors;
   }
 
-  createForm(){
-
-  }
-
   sendForm(){
+    this.clickedOnGenerate = true;
+
     this.apiAccessService.GetSongs(this.paramsForm.value).subscribe((songs: any) => {
       this.songs = songs;
       this.generated = true;
+      window.scrollTo(0, 0);
     }, error => {
       this.notification.error('Something went wrong. Try again.');
     });
@@ -113,6 +116,20 @@ export class FormComponent implements OnInit {
 
   sended(){
     return this.generated;
+  }
+
+  clicked(){
+    return this.clickedOnGenerate;
+  }
+
+  goBackToForm(){
+    this.generated = false;
+    this.clickedOnGenerate = false;
+    window.scrollTo(0, 0);
+  }
+
+  startOver(){
+    this.ngOnInit();
   }
 
 }

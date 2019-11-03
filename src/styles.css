@@ -18,6 +18,10 @@ fieldset {
     margin-top: 10px;
 }
 
+.btn-wide-wo-margin{
+    width: 300px;
+}
+
 #sbm {
     margin-right: 20px;
 }
