@@ -50,4 +50,8 @@ export class ApiAccessService {
   CreatePlaylist(userId): Observable<Playlist>{
     return this.http.post<Playlist>(this.apiUrl + 'users/' + userId + '/playlists', {'name': 'Spotify Playlist Generator'}, this.options);
   }
+
+  AddSongs(playlistId, urisToAdd: string[]) {
+    return this.http.post(this.apiUrl + 'playlists/' + playlistId + '/tracks', {'uris': urisToAdd}, this.options);
+  }
 }

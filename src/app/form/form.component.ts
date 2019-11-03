@@ -5,6 +5,7 @@ import { TokenManagementService } from '../_services/token-management.service';
 import { NotificationService } from '../_services/notification.service';
 import { User } from '../_models/user';
 import { Playlist } from '../_models/playlist';
+import { returnedPlaylist } from '../_models/returnedPlaylist';
 
 @Component({
   selector: 'app-form',
@@ -18,7 +19,7 @@ export class FormComponent implements OnInit {
   user: User;
   playlist: Playlist;
 
-  songs: any;
+  songs: returnedPlaylist;
 
   constructor(private fb: FormBuilder, private apiAccessService: ApiAccessService, private token: TokenManagementService, private notification: NotificationService) {
    }
@@ -156,7 +157,22 @@ export class FormComponent implements OnInit {
     }, error => {
       this.notification.error('Something went wrong. Try again.');
     }, () => {
-      console.log(this.playlist.id);
+      this.addSongs();
     })
+  }
+
+  addSongs(){
+    var urisToAdd = this.songs.tracks.map(function(song) {
+      return song.uri;
+    });
+
+    this.apiAccessService.AddSongs(this.playlist.id, urisToAdd).subscribe(() => {
+      this.notification.success("Playlist added successfully.");
+    }, error => {
+      this.notification.error('Something went wrong. Try again.');
+    }, () => {
+      this.ngOnInit();
+    });
+    
   }
 }
