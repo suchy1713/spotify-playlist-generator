@@ -4,6 +4,7 @@ import { Router, UrlSerializer } from '@angular/router';
 import { Observable } from 'rxjs';
 import { returnedPlaylist } from '../_models/returnedPlaylist';
 import { User } from '../_models/user';
+import { Playlist } from '../_models/playlist';
 
 @Injectable({
   providedIn: 'root'
@@ -24,7 +25,8 @@ export class ApiAccessService {
     var params = {
       client_id: this.clientId,
       response_type: 'token',
-      redirect_uri: 'https://localhost:4200'
+      redirect_uri: 'https://localhost:4200',
+      scope: 'playlist-modify-public'
     }
 
     var tree = this.router.createUrlTree([], { queryParams: params });
@@ -43,5 +45,9 @@ export class ApiAccessService {
 
   GetUser() : Observable<User>{
     return this.http.get<User>(this.apiUrl + 'me', this.options);
+  }
+
+  CreatePlaylist(userId): Observable<Playlist>{
+    return this.http.post<Playlist>(this.apiUrl + 'users/' + userId + '/playlists', {'name': 'Spotify Playlist Generator'}, this.options);
   }
 }

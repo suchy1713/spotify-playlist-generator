@@ -4,6 +4,7 @@ import { ApiAccessService } from '../_services/api-access.service';
 import { TokenManagementService } from '../_services/token-management.service';
 import { NotificationService } from '../_services/notification.service';
 import { User } from '../_models/user';
+import { Playlist } from '../_models/playlist';
 
 @Component({
   selector: 'app-form',
@@ -15,6 +16,7 @@ export class FormComponent implements OnInit {
   generated: boolean = false;
   clickedOnGenerate: boolean = false;
   user: User;
+  playlist: Playlist;
 
   songs: any;
 
@@ -135,13 +137,26 @@ export class FormComponent implements OnInit {
   }
 
   addToSpotify(){
+    this.getUser();
+  }
+
+  getUser(){
     this.apiAccessService.GetUser().subscribe((user: User) => {
       this.user = user;
     }, error => {
       this.notification.error('Something went wrong. Try again.');
     }, () => {
-      console.log(this.user.id);
+      this.createPlaylist();
     });
   }
 
+  createPlaylist(){
+    this.apiAccessService.CreatePlaylist(this.user.id).subscribe((playlist: Playlist) => {
+      this.playlist = playlist;
+    }, error => {
+      this.notification.error('Something went wrong. Try again.');
+    }, () => {
+      console.log(this.playlist.id);
+    })
+  }
 }
