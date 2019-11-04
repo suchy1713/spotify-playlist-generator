@@ -10,7 +10,17 @@ fieldset {
 
 #body {
     margin-top: 85px;
+    margin-bottom: 50px;
 }
+
+.footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 30px;
+    line-height: 30px;
+    background-color: #ebebeb;
+  }
 
 .btn-wide {
     width: 300px;
