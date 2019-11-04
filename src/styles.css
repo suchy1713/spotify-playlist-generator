@@ -33,6 +33,11 @@ fieldset {
     height: 500px;
 }
 
+.btn-huge {
+    width: 500px;
+    height: 100px;
+}
+
 @media (max-width: 350px) {
     .btn-wide {
       width: 200px;
