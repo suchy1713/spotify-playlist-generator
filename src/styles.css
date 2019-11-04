@@ -48,8 +48,18 @@ fieldset {
     height: 100px;
 }
 
+@media (max-width: 550px) {
+    .btn-huge {
+      width: 300px;
+    }
+}
+
 @media (max-width: 350px) {
     .btn-wide {
       width: 200px;
     }
-  }
+
+    .btn-huge {
+        width: 200px;
+      }
+}
