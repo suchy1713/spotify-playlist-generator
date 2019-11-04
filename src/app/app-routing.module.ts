@@ -5,7 +5,7 @@ import { FormComponent } from './form/form.component';
 
 const routes: Routes = [
   { path: '', component: MainComponent },
-  { path: 'form', component: FormComponent },
+  { path: 'generate', component: FormComponent },
   { path: '**', redirectTo: '', pathMatch: 'full' }
 ];
 

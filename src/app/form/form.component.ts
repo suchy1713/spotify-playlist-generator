@@ -33,6 +33,7 @@ export class FormComponent implements OnInit {
   }
 
   generateForm(){
+    window.scrollTo(0, 0);
     this.paramsForm = this.fb.group({
       seed_genres: ['', []],
       limit: [20, [Validators.required, Validators.min(1), Validators.max(100)]],
