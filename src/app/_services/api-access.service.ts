@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { returnedPlaylist } from '../_models/returnedPlaylist';
 import { User } from '../_models/user';
 import { Playlist } from '../_models/playlist';
+import { DatePipe } from '@angular/common';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +20,7 @@ export class ApiAccessService {
     'Authorization': 'Bearer ' + localStorage.getItem('access-token') });
   options = { headers: this.headers };
 
-  constructor(private http: HttpClient, private router: Router, private urlSerializer: UrlSerializer) { }
+  constructor(private http: HttpClient, private router: Router, private urlSerializer: UrlSerializer, private datepipe: DatePipe) { }
 
   GetAccessToken(){
     var params = {
@@ -48,7 +49,9 @@ export class ApiAccessService {
   }
 
   CreatePlaylist(userId): Observable<Playlist>{
-    return this.http.post<Playlist>(this.apiUrl + 'users/' + userId + '/playlists', {'name': 'Spotify Playlist Generator'}, this.options);
+    var date = new Date();
+    var formatted_date = this.datepipe.transform(date, 'yyyy-MM-dd HH:mm').toString();
+    return this.http.post<Playlist>(this.apiUrl + 'users/' + userId + '/playlists', {'name': 'SPG - ' + formatted_date}, this.options);
   }
 
   AddSongs(playlistId, urisToAdd: string[]) {

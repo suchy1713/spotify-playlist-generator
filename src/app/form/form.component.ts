@@ -116,6 +116,7 @@ export class FormComponent implements OnInit {
       window.scrollTo(0, 0);
     }, error => {
       this.notification.error('Something went wrong. Try again.');
+      this.clickedOnGenerate = false;
     });
   }
 

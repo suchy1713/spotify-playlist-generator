@@ -606,43 +606,58 @@
         </div>
       </fieldset>
 
-      <div class="container text-center">
-        <span *ngIf="clicked()">ŁADOWANIE</span>
-        <button type="submit" [disabled]="!paramsForm.valid" id="sbm" class="btn btn-success btn-lg btn-wide">Generate</button>
-        <button type="reset" class="btn btn-danger btn-lg btn-wide">Reset</button>
+      <div class="form-group text-center mt-3 row">
+        <div class="col-12 text-sm-center text-md-right col-md-6 mt-2">
+          <button type="submit" [disabled]="!paramsForm.valid || clicked()" class="btn btn-success btn-lg btn-wide">
+            <ng-container *ngIf="clicked()"><i class="fa fa-circle-o-notch fa-spin fa-fw"></i> Loading</ng-container>
+            <ng-container *ngIf="!clicked()"><i class="fa fa-check"></i> Generate</ng-container>
+          </button>
+        </div>
+        <div class="col-12 col-md-6 text-sm-center text-md-left mt-2">
+          <button type="button" (click)="generateForm()" class="btn btn-danger btn-lg btn-wide"><i class="fa fa-undo"></i> Reset</button>
+        </div>
       </div>
     </form>
   </div>
 
   <div *ngIf="sended()" class="container">
     <h2 class="text-center">Your playlist:</h2>
-    <table class="table table-striped text-center">
-      <thead>
-        <tr>
-          <th scope="col"></th>
-          <th scope="col">Name</th>
-          <th scope="col">Artists</th>
-          <th scope="col">Album</th>
-          <th scope="col">Year</th>
-          <th scope="col">Duration</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let track of songs.tracks">
-          <td class="align-middle"><img src="{{track.album.images[0].url}}" height="50" width="50"></td>
-          <td class="align-middle"><strong>{{track.name}}</strong></td>
-          <td class="align-middle"><ng-container *ngFor="let artist of track.artists">{{artist.name}} </ng-container></td>
-          <td class="align-middle">{{track.album.name}}</td>
-          <td class="align-middle">{{track.album.release_date | date:'yyyy'}}</td>
-          <td class="align-middle">{{track.duration_ms | date:'mm:ss'}}</td>
-        </tr>
-      </tbody>
-    </table>
-
-    <div class="form-group text-center mt-3">
-      <button type="button" (click)="goBackToForm()" class="btn btn-lg btn-primary mr-2"><i class="fa fa-chevron-left"></i></button>
-      <button type="button" (click)="addToSpotify()" class="btn btn-success btn-lg btn-wide-wo-margin">Add to Spotify</button>
-      <button type="button" (click)="startOver()" class="btn btn-danger btn-lg btn-wide-wo-margin ml-2">Start Over</button>
+    <div class="table-responsive">
+      <table class="table table-striped text-center">
+        <thead>
+          <tr>
+            <th scope="col"></th>
+            <th scope="col">Name</th>
+            <th scope="col">Artists</th>
+            <th scope="col">Album</th>
+            <th scope="col">Year</th>
+            <th scope="col">Duration</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let track of songs.tracks">
+            <td class="align-middle"><img src="{{track.album.images[0].url}}" height="50" width="50"></td>
+            <td class="align-middle"><strong>{{track.name}}</strong></td>
+            <td class="align-middle"><ng-container *ngFor="let artist of track.artists">{{artist.name}} </ng-container></td>
+            <td class="align-middle">{{track.album.name}}</td>
+            <td class="align-middle">{{track.album.release_date | date:'yyyy'}}</td>
+            <td class="align-middle">{{track.duration_ms | date:'mm:ss'}}</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
+
+    <div class="form-group text-center mt-3 row">
+      <div class="col-12 text-sm-center text-md-right col-lg-4 mt-2">
+        <button type="button" (click)="goBackToForm()" class="btn btn-lg btn-primary btn-wide"><i class="fa fa-chevron-left"></i> Go Back</button>
+      </div>
+      <div class="col-12 text-center col-lg-4 mt-2">
+        <button type="button" (click)="addToSpotify()" class="btn btn-success btn-lg btn-wide"><i class="fa fa-plus"></i> Add to Spotify</button>
+      </div>
+      <div class="col-12 text-sm-center text-md-left col-lg-4 mt-2">
+        <button type="button" (click)="startOver()" class="btn btn-danger btn-lg btn-wide"><i class="fa fa-undo"></i> Start Over</button>
+      </div>
+    </div>
+
   </div>
 </div>

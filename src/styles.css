@@ -1,6 +1,6 @@
 @import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 @import '../node_modules/bootswatch/dist/flatly/bootstrap.min.css';
-@import '../node_modules/font-awesome/css/font-awesome.min.css';
+@import '../node_modules/font-awesome/css/font-awesome.css';
 @import '../node_modules/alertifyjs/build/css/alertify.min.css';
 @import '../node_modules/alertifyjs/build/css/themes/bootstrap.min.css';
 
@@ -14,8 +14,11 @@ fieldset {
 
 .btn-wide {
     width: 300px;
+}
+
+.btn-margin{
     margin-bottom: 20px;
-    margin-top: 10px;
+    margin-top: 10px; 
 }
 
 .btn-wide-wo-margin{
@@ -29,3 +32,9 @@ fieldset {
 .select-big {
     height: 500px;
 }
+
+@media (max-width: 350px) {
+    .btn-wide {
+      width: 200px;
+    }
+  }

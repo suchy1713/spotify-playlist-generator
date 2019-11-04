@@ -10,6 +10,7 @@ import { FormComponent } from './form/form.component';
 
 import { PopoverModule } from 'ngx-bootstrap/popover';
 import { MainComponent } from './main/main.component';
+import { DatePipe } from '@angular/common';
 
 @NgModule({
    declarations: [
@@ -26,7 +27,9 @@ import { MainComponent } from './main/main.component';
       FormsModule,
       ReactiveFormsModule
    ],
-   providers: [],
+   providers: [
+      DatePipe
+   ],
    bootstrap: [
       AppComponent
    ]
