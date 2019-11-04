@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ApiAccessService } from '../_services/api-access.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TokenManagementService } from '../_services/token-management.service';
+import { NotificationService } from '../_services/notification.service';
 
 @Component({
   selector: 'app-main',
@@ -10,7 +11,7 @@ import { TokenManagementService } from '../_services/token-management.service';
 })
 export class MainComponent implements OnInit {
 
-  constructor(private apiAccessService: ApiAccessService, private route: ActivatedRoute, private token: TokenManagementService, private router: Router) { }
+  constructor(private apiAccessService: ApiAccessService, private route: ActivatedRoute, private token: TokenManagementService, private router: Router, private notification: NotificationService) { }
 
   ngOnInit() {
     this.token.deleteTokenIfExpired();
@@ -18,9 +19,9 @@ export class MainComponent implements OnInit {
   }
 
   connect(){
-    this.apiAccessService.GetAccessToken().subscribe(() => {
+    this.apiAccessService.GetAccessToken(window.location.href).subscribe(() => {
     }, error => {
-      console.log(error);
+      this.notification.error("Something went wrong. Try again.")
     });
   }
 

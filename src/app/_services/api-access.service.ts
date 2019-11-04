@@ -6,7 +6,6 @@ import { returnedPlaylist } from '../_models/returnedPlaylist';
 import { User } from '../_models/user';
 import { Playlist } from '../_models/playlist';
 import { DatePipe } from '@angular/common';
-import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +14,6 @@ export class ApiAccessService {
   url = 'https://accounts.spotify.com/';
   apiUrl = 'https://api.spotify.com/v1/'
   clientId = 'bc07d1e72d334e599fa82752510bedba';
-  redirectUrl = environment.redirectUrl;
 
   headers = new HttpHeaders({
     'Content-Type': 'application/json',
@@ -24,11 +22,11 @@ export class ApiAccessService {
 
   constructor(private http: HttpClient, private router: Router, private urlSerializer: UrlSerializer, private datepipe: DatePipe) { }
 
-  GetAccessToken(){
+  GetAccessToken(url: any){
     var params = {
       client_id: this.clientId,
       response_type: 'token',
-      redirect_uri: this.redirectUrl,
+      redirect_uri: url,
       scope: 'playlist-modify-public'
     }
 
