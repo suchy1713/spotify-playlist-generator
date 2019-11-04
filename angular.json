@@ -25,8 +25,7 @@
             "styles": [
               "src/styles.css"
             ],
-            "scripts": [
-            ]
+            "scripts": []
           },
           "configurations": {
             "production": {
@@ -36,6 +35,8 @@
                   "with": "src/environments/environment.prod.ts"
                 }
               ],
+              "baseHref": "/spotify-playlist-generator",
+              "deployUrl": "https://suchy1713.github.io/spotify-playlist-generator/",
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
@@ -44,7 +45,7 @@
               "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
-              "buildOptimizer": true,
+              "buildOptimizer": false,
               "budgets": [
                 {
                   "type": "initial",
@@ -100,6 +101,10 @@
               "**/node_modules/**"
             ]
           }
+        },
+        "deploy": {
+          "builder": "angular-cli-ghpages:deploy",
+          "options": {}
         }
       }
     },

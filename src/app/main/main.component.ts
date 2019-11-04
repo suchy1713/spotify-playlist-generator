@@ -19,10 +19,7 @@ export class MainComponent implements OnInit {
   }
 
   connect(){
-    this.apiAccessService.GetAccessToken(window.location.href).subscribe(() => {
-    }, error => {
-      this.notification.error("Something went wrong. Try again.")
-    });
+    this.apiAccessService.GetAccessToken(window.location.href);
   }
 
   retrieveToken(){

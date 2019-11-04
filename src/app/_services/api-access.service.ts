@@ -31,9 +31,9 @@ export class ApiAccessService {
     }
 
     var tree = this.router.createUrlTree([], { queryParams: params });
-    var queryString = this.urlSerializer.serialize(tree);
-
-    return this.http.get(this.url + 'authorize' + queryString);
+    var queryString = this.urlSerializer.serialize(tree).substring('/'.length);
+    
+    window.location.href = this.url + 'authorize' + queryString;
   }
 
   GetSongs(params: any): Observable<returnedPlaylist>{
