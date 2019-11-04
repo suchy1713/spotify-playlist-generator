@@ -35,7 +35,7 @@
                   "with": "src/environments/environment.prod.ts"
                 }
               ],
-              "baseHref": "/spotify-playlist-generator",
+              "baseHref": "/",
               "deployUrl": "https://suchy1713.github.io/spotify-playlist-generator/",
               "optimization": true,
               "outputHashing": "all",

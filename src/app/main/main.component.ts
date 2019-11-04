@@ -26,7 +26,7 @@ export class MainComponent implements OnInit {
     this.route.fragment.subscribe((fragment: string) => {
       if(fragment){
         this.token.saveToken(new URLSearchParams(fragment).get('access_token'), String(new Date(new Date().getTime() + (1000 * 60 * 60))));
-        this.router.navigate(['/']);
+        this.router.navigate(['/spotify-playlist-generator/']);
       }
     });
   }
