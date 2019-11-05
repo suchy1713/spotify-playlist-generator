@@ -7,6 +7,7 @@ import { User } from '../_models/user';
 import { Playlist } from '../_models/playlist';
 import { returnedPlaylist } from '../_models/returnedPlaylist';
 import { Title } from '@angular/platform-browser';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-form',
@@ -23,7 +24,7 @@ export class FormComponent implements OnInit {
   songs: returnedPlaylist;
 
   constructor(private fb: FormBuilder, private apiAccessService: ApiAccessService, private token: TokenManagementService, 
-              private notification: NotificationService, private title: Title) {
+              private notification: NotificationService, private title: Title, private translate: TranslateService) {
    }
 
   ngOnInit() {
@@ -36,15 +37,21 @@ export class FormComponent implements OnInit {
   }
 
   setTitle(){
-    this.title.setTitle('Generate Playlist');
+    this.translate.get('FORM.TITLE').subscribe((res: string) => {
+      this.title.setTitle(res);
+    })
   }
 
   switchTitle(){
     if(this.title.getTitle() == 'Generate Playlist'){
-      this.title.setTitle('Your Playlist');
+      this.translate.get('PLAYLIST.TITLE').subscribe((res: string) => {
+        this.title.setTitle(res);
+      })
     }
     else{
-      this.title.setTitle('Generate Playlist');
+      this.translate.get('FORM.TITLE').subscribe((res: string) => {
+        this.title.setTitle(res);
+      })
     }
   }
 
@@ -132,8 +139,10 @@ export class FormComponent implements OnInit {
       this.generated = true;
       this.switchTitle();
       window.scrollTo(0, 0);
-    }, error => {
-      this.notification.error('Something went wrong. Try again.');
+    }, () => {
+        this.translate.get('SHARED.ERROR').subscribe((res: string) => {
+          this.notification.error(res);
+        })
       this.clickedOnGenerate = false;
     });
   }
@@ -164,8 +173,10 @@ export class FormComponent implements OnInit {
   getUser(){
     this.apiAccessService.GetUser().subscribe((user: User) => {
       this.user = user;
-    }, error => {
-      this.notification.error('Something went wrong. Try again.');
+    }, () => {
+      this.translate.get('SHARED.ERROR').subscribe((res: string) => {
+        this.notification.error(res);
+    })
     }, () => {
       this.createPlaylist();
     });
@@ -174,8 +185,10 @@ export class FormComponent implements OnInit {
   createPlaylist(){
     this.apiAccessService.CreatePlaylist(this.user.id).subscribe((playlist: Playlist) => {
       this.playlist = playlist;
-    }, error => {
-      this.notification.error('Something went wrong. Try again.');
+    }, () => {
+      this.translate.get('SHARED.ERROR').subscribe((res: string) => {
+        this.notification.error(res);
+      })
     }, () => {
       this.addSongs();
     })
@@ -187,9 +200,13 @@ export class FormComponent implements OnInit {
     });
 
     this.apiAccessService.AddSongs(this.playlist.id, urisToAdd).subscribe(() => {
-      this.notification.success("Playlist added successfully.");
-    }, error => {
-      this.notification.error('Something went wrong. Try again.');
+      this.translate.get('PLAYLIST.SUCCESS').subscribe((res: string) => {
+        this.notification.success("Playlist added successfully.");
+      })
+    }, () => {
+      this.translate.get('SHARED.ERROR').subscribe((res: string) => {
+        this.notification.error(res);
+      })
     }, () => {
       this.ngOnInit();
     });

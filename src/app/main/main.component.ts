@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { TokenManagementService } from '../_services/token-management.service';
 import { NotificationService } from '../_services/notification.service';
 import { Title } from '@angular/platform-browser';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-main',
@@ -13,7 +14,7 @@ import { Title } from '@angular/platform-browser';
 export class MainComponent implements OnInit {
 
   constructor(private apiAccessService: ApiAccessService, private route: ActivatedRoute, private token: TokenManagementService, private router: Router, 
-              private notification: NotificationService, private title: Title) { }
+              private notification: NotificationService, private title: Title, private translate: TranslateService) { }
 
   ngOnInit() {
     this.setTitle();
@@ -22,7 +23,9 @@ export class MainComponent implements OnInit {
   }
 
   setTitle() {
-    this.title.setTitle('Spotify Playlist Generator');
+    this.translate.get('MAIN.TITLE').subscribe((res: string) => {
+      this.title.setTitle(res);
+  });
   }
 
   connect(){

@@ -1,13 +1,13 @@
 <div class="container" id="body">
   <div class="container" *ngIf="!sended()">
-    <h1 class="text-center">Generate your playlist!</h1>
+    <h1 class="text-center">{{ 'FORM.H1' | translate }}</h1>
     <form [formGroup]="paramsForm" (ngSubmit)="sendForm()">
 
       <fieldset>
         <legend>
-          Genres (1-5)
-          <button type="button" class="btn mb-1" style="background-color:transparent" placement="right" popoverTitle="Genres (1-5)"
-          popover="Pick up to 5 genres." triggers="mouseenter:mouseleave">
+          {{ 'FORM.GENRES' | translate }}
+          <button type="button" class="btn mb-1" style="background-color:transparent" placement="right" popoverTitle="{{ 'FORM.GENRES' | translate }}"
+          popover="{{ 'FORM.GENRES-DESC' | translate }}" triggers="mouseenter:mouseleave">
             <i class="fa fa-question-circle"></i>
           </button>
         </legend>
@@ -47,19 +47,19 @@
           <option value="soul">Soul</option>
         </select>
           <div class="invalid-feedback" *ngIf="paramsForm.hasError('max_genres') && paramsForm.get('seed_genres').touched">
-            You cannot choose more than 5 genres.
+            {{ 'FORM.MAX-GENRES' | translate }}
           </div>
           <div class="invalid-feedback" *ngIf="paramsForm.hasError('min_genres')">
-            You have to pick at least 1 genre.
+            {{ 'FORM.MIN-GENRES' | translate }}
           </div>
         </div>
       </fieldset>
 
       <fieldset>
         <legend>
-          Size (1-100)
-          <button type="button" class="btn mb-1" style="background-color:transparent" placement="right" popoverTitle="Size (1-100)"
-          popover="The target size of your playlist. Default: 20" triggers="mouseenter:mouseleave">
+          {{ 'FORM.SIZE' | translate }}
+          <button type="button" class="btn mb-1" style="background-color:transparent" placement="right" popoverTitle="{{ 'FORM.SIZE' | translate }}"
+          popover="{{ 'FORM.SIZE-DESC' | translate }}" triggers="mouseenter:mouseleave">
             <i class="fa fa-question-circle"></i>
           </button>
         </legend>
@@ -68,68 +68,68 @@
                 formControlName="limit"
                   name="limit" id="limit" class="form-control" />
           <div class="invalid-feedback" *ngIf="paramsForm.get('limit').hasError('required') && paramsForm.get('limit').touched">
-            Size is required.
+            {{ 'FORM.REQUIRED' | translate }}
           </div>
           <div class="invalid-feedback" *ngIf="paramsForm.get('limit').hasError('min') && paramsForm.get('limit').touched">
-            Size must be at least 1.
+            {{ 'FORM.MIN-ERROR' | translate }}
           </div>
           <div class="invalid-feedback" *ngIf="paramsForm.get('limit').hasError('max') && paramsForm.get('limit').touched">
-            Size cannot exceed 100.
+            {{ 'FORM.MAX-ERROR-100' | translate }}
           </div>
         </div>
       </fieldset>
 
       <fieldset>
         <legend>
-          Acousticness (0-1)
+          {{ 'FORM.ACOUSTICNESS' | translate }}
           <button type="button" class="btn mb-1" style="background-color:transparent" placement="right"triggers="mouseenter:mouseleave"
-          popoverTitle="Acousticness (0-1)"
-          popover="A confidence measure from 0.0 to 1.0 of whether the track is acoustic. 1.0 represents high confidence the track is acoustic.">
+          popoverTitle="{{ 'FORM.ACOUSTICNESS' | translate }}"
+          popover="{{ 'FORM.ACOUSTICNESS-DESC' | translate }}">
             <i class="fa fa-question-circle"></i>
           </button>
         </legend>
         <div class="row">
           <div class="col-6">
             <div class="form-group">
-              <label for="min_acousticness">MIN</label>
+              <label for="min_acousticness">{{ 'FORM.MIN' | translate }}</label>
               <input type="number" [ngClass]="{'is-invalid': paramsForm.get('min_acousticness').errors && paramsForm.get('min_acousticness').touched
                                                           || paramsForm.hasError('acousticness') && paramsForm.get('min_acousticness').touched}"
                 formControlName="min_acousticness"
                   name="limit" id="limit" class="form-control" />
               <div class="invalid-feedback" *ngIf="paramsForm.get('min_acousticness').hasError('required') && paramsForm.get('min_acousticness').touched">
-                Min Acousticness is required.
+                {{ 'FORM.REQUIRED' | translate }}
               </div>
               <div class="invalid-feedback" *ngIf="paramsForm.get('min_acousticness').hasError('min') && paramsForm.get('min_acousticness').touched">
-                Min Acousticness must be at least 0.
+                {{ 'FORM.MIN-ERROR' | translate }}
               </div>
               <div class="invalid-feedback" *ngIf="paramsForm.get('min_acousticness').hasError('max') && paramsForm.get('min_acousticness').touched">
-                Min Acousticness cannot exceed 1.
+                {{ 'FORM.MAX-ERROR' | translate }}
               </div>
               <div class="invalid-feedback" *ngIf="paramsForm.hasError('acousticness') && !paramsForm.get('min_acousticness').hasError('required')
                                                                                       && !paramsForm.get('max_acousticness').hasError('required')">
-                Min Acousticness cannot exceed Max Acousticness
+                {{ 'FORM.MINMAX-ERROR' | translate }}
               </div>
             </div>
           </div>
           <div class="col-6">
             <div class="form-group">
-              <label for="max_acousticness">MAX</label>
+              <label for="max_acousticness">{{ 'FORM.MAX' | translate }}</label>
               <input type="number" [ngClass]="{'is-invalid': paramsForm.get('max_acousticness').errors && paramsForm.get('max_acousticness').touched
                                                           || paramsForm.hasError('acousticness') && paramsForm.get('min_acousticness').touched}"
                 formControlName="max_acousticness"
                   name="limit" id="limit" class="form-control" />
               <div class="invalid-feedback" *ngIf="paramsForm.get('max_acousticness').hasError('required') && paramsForm.get('max_acousticness').touched">
-                Max Acousticness is required.
+                {{ 'FORM.REQUIRED' | translate }}
               </div>
               <div class="invalid-feedback" *ngIf="paramsForm.get('max_acousticness').hasError('min') && paramsForm.get('max_acousticness').touched">
-                Max Acousticness must be at least 0.
+                {{ 'FORM.MIN-ERROR' | translate }}
               </div>
               <div class="invalid-feedback" *ngIf="paramsForm.get('max_acousticness').hasError('max') && paramsForm.get('max_acousticness').touched">
-                Max Acousticness cannot exceed 1.
+                {{ 'FORM.MAX-ERROR' | translate }}
               </div>
               <div class="invalid-feedback" *ngIf="paramsForm.hasError('acousticness') && !paramsForm.get('min_acousticness').hasError('required')
                                                                                       && !paramsForm.get('max_acousticness').hasError('required')">
-                Min Acousticness cannot exceed Max Acousticness
+                {{ 'FORM.MINMAX-ERROR' | translate }}
               </div>
             </div>
           </div>
@@ -138,56 +138,55 @@
 
       <fieldset>
         <legend>
-          Danceability (0-1)
+          {{ 'FORM.DANCEABILITY' | translate }}
           <button type="button" class="btn mb-1" style="background-color:transparent" placement="right"triggers="mouseenter:mouseleave"
-          popoverTitle="Danceability (0-1)"
-          popover="Danceability describes how suitable a track is for dancing based on a combination of musical elements including tempo, 
-          rhythm stability, beat strength, and overall regularity. A value of 0.0 is least danceable and 1.0 is most danceable.">
+          popoverTitle="{{ 'FORM.DANCEABILITY' | translate }}"
+          popover="{{ 'FORM.DANCEABILITY-DESC' | translate }}">
             <i class="fa fa-question-circle"></i>
           </button>
         </legend>
         <div class="row">
           <div class="col-6">
             <div class="form-group">
-              <label for="min_danceability">MIN</label>
+              <label for="min_danceability">{{ 'FORM.MIN' | translate }}</label>
               <input type="number" [ngClass]="{'is-invalid': paramsForm.get('min_danceability').errors && paramsForm.get('min_danceability').touched
                                                           || paramsForm.hasError('danceability') && paramsForm.get('min_danceability').touched}"
                 formControlName="min_danceability"
                   name="limit" id="limit" class="form-control" />
               <div class="invalid-feedback" *ngIf="paramsForm.get('min_danceability').hasError('required') && paramsForm.get('min_danceability').touched">
-                Min Danceability is required.
+                {{ 'FORM.REQUIRED' | translate }}
               </div>
               <div class="invalid-feedback" *ngIf="paramsForm.get('min_danceability').hasError('min') && paramsForm.get('min_danceability').touched">
-                Min Danceability must be at least 0.
+                {{ 'FORM.MIN-ERROR' | translate }}
               </div>
               <div class="invalid-feedback" *ngIf="paramsForm.get('min_danceability').hasError('max') && paramsForm.get('min_danceability').touched">
-                Min Danceability cannot exceed 1.
+                {{ 'FORM.MAX-ERROR' | translate }}
               </div>
               <div class="invalid-feedback" *ngIf="paramsForm.hasError('danceability') && !paramsForm.get('min_danceability').hasError('required')
                                                                                       && !paramsForm.get('max_danceability').hasError('required')">
-                Min Danceability cannot exceed Max Danceability
+                {{ 'FORM.MINMAX-ERROR' | translate }}
               </div>
             </div>
           </div>
           <div class="col-6">
             <div class="form-group">
-              <label for="max_danceability">MAX</label>
+              <label for="max_danceability">{{ 'FORM.MAX' | translate }}</label>
               <input type="number" [ngClass]="{'is-invalid': paramsForm.get('max_danceability').errors && paramsForm.get('max_danceability').touched
                                                           || paramsForm.hasError('danceability') && paramsForm.get('max_danceability').touched}"
                 formControlName="max_danceability"
                   name="limit" id="limit" class="form-control" />
               <div class="invalid-feedback" *ngIf="paramsForm.get('max_danceability').hasError('required') && paramsForm.get('max_danceability').touched">
-                Max Danceability is required.
+                {{ 'FORM.REQUIRED' | translate }}
               </div>
               <div class="invalid-feedback" *ngIf="paramsForm.get('max_danceability').hasError('min') && paramsForm.get('max_danceability').touched">
-                Max Danceability must be at least 0.
+                {{ 'FORM.MIN-ERROR' | translate }}
               </div>
               <div class="invalid-feedback" *ngIf="paramsForm.get('max_danceability').hasError('max') && paramsForm.get('max_danceability').touched">
-                Max Danceability cannot exceed 1.
+                {{ 'FORM.MAX-ERROR' | translate }}
               </div>
               <div class="invalid-feedback" *ngIf="paramsForm.hasError('danceability') && !paramsForm.get('min_danceability').hasError('required')
                                                                                       && !paramsForm.get('max_danceability').hasError('required')">
-                Min Danceability cannot exceed Max Danceability
+                {{ 'FORM.MINMAX-ERROR' | translate }}
               </div>
             </div>
           </div>
@@ -196,58 +195,55 @@
 
       <fieldset>
         <legend>
-          Energy (0-1)
+          {{ 'FORM.ENERGY' | translate }}
           <button type="button" class="btn mb-1" style="background-color:transparent" placement="right"triggers="mouseenter:mouseleave"
-          popoverTitle="Energy (0-1)"
-          popover="Energy is a measure from 0.0 to 1.0 and represents a perceptual measure of intensity and activity. Typically, 
-          energetic tracks feel fast, loud, and noisy. For example, death metal has high energy, while a Bach prelude scores low 
-          on the scale. Perceptual features contributing to this attribute include dynamic range, perceived loudness, timbre, onset 
-          rate, and general entropy.">
+          popoverTitle="{{ 'FORM.ENERGY' | translate }}"
+          popover="{{ 'FORM.ENERGY-DESC' | translate }}">
             <i class="fa fa-question-circle"></i>
           </button>
         </legend>
         <div class="row">
           <div class="col-6">
             <div class="form-group">
-              <label for="min_energy">MIN</label>
+              <label for="min_energy">{{ 'FORM.MIN' | translate }}</label>
               <input type="number" [ngClass]="{'is-invalid': paramsForm.get('min_energy').errors && paramsForm.get('min_energy').touched
                                                           || paramsForm.hasError('energy') && paramsForm.get('min_energy').touched}"
                 formControlName="min_energy"
                   name="limit" id="limit" class="form-control" />
               <div class="invalid-feedback" *ngIf="paramsForm.get('min_energy').hasError('required') && paramsForm.get('min_energy').touched">
-                Min Energy is required.
+                {{ 'FORM.REQUIRED' | translate }}
               </div>
               <div class="invalid-feedback" *ngIf="paramsForm.get('min_energy').hasError('min') && paramsForm.get('min_energy').touched">
-                Min Energy must be at least 0.
+                {{ 'FORM.MIN-ERROR' | translate }}
               </div>
               <div class="invalid-feedback" *ngIf="paramsForm.get('min_energy').hasError('max') && paramsForm.get('min_energy').touched">
-                Min Energy cannot exceed 1.
+                {{ 'FORM.MAX-ERROR' | translate }}
               </div>
               <div class="invalid-feedback" *ngIf="paramsForm.hasError('energy') && !paramsForm.get('min_energy').hasError('required')
                                                                                       && !paramsForm.get('max_energy').hasError('required')">
-                Min Energy cannot exceed Max Energy
+                {{ 'FORM.MINMAX-ERROR' | translate }}
               </div>
             </div>
           </div>
           <div class="col-6">
             <div class="form-group">
-              <label for="max_energy">MAX</label>
+              <label for="max_energy">{{ 'FORM.MAX' | translate }}</label>
               <input type="number" [ngClass]="{'is-invalid': paramsForm.get('max_energy').errors && paramsForm.get('max_energy').touched
                                                           || paramsForm.hasError('energy') && paramsForm.get('max_energy').touched}"
                 formControlName="max_energy"
                   name="limit" id="limit" class="form-control" />
               <div class="invalid-feedback" *ngIf="paramsForm.get('max_energy').hasError('required') && paramsForm.get('max_energy').touched">
-                Max Energy is required.
+                {{ 'FORM.REQUIRED' | translate }}
               </div>
               <div class="invalid-feedback" *ngIf="paramsForm.get('max_energy').hasError('min') && paramsForm.get('max_energy').touched">
-                Max Energy must be at least 0.
+                {{ 'FORM.MIN-ERROR' | translate }}
               </div>
               <div class="invalid-feedback" *ngIf="paramsForm.get('max_energy').hasError('max') && paramsForm.get('max_energy').touched">
-                Max Energy cannot exceed 1.
+                {{ 'FORM.MAX-ERROR' | translate }}
               </div>
               <div class="invalid-feedback" *ngIf="paramsForm.hasError('energy') && !paramsForm.get('min_energy').hasError('required')
                                                                                       && !paramsForm.get('max_energy').hasError('required')">
-                Min Energy cannot exceed Max Energy
+                {{ 'FORM.MINMAX-ERROR' | translate }}
               </div>
             </div>
           </div>
@@ -256,58 +252,55 @@
 
       <fieldset>
         <legend>
-          Instrumentalness (0-1)
+          {{ 'FORM.INSTRUMENTALNESS' | translate }}
           <button type="button" class="btn mb-1" style="background-color:transparent" placement="right"triggers="mouseenter:mouseleave"
-          popoverTitle="Instrumentalness (0-1)"
-          popover="Predicts whether a track contains no vocals. “Ooh” and “aah” sounds are treated as instrumental in this context. 
-          Rap or spoken word tracks are clearly “vocal”. The closer the instrumentalness value is to 1.0, the greater likelihood the 
-          track contains no vocal content. Values above 0.5 are intended to represent instrumental tracks, but confidence is higher as 
-          the value approaches 1.0.">
+          popoverTitle="{{ 'FORM.INSTRUMENTALNESS' | translate }}"
+          popover="{{ 'FORM.INSTRUMENTALNESS-DESC' | translate }}">
             <i class="fa fa-question-circle"></i>
           </button>
         </legend>
         <div class="row">
           <div class="col-6">
             <div class="form-group">
-              <label for="min_instrumentalness">MIN</label>
+              <label for="min_instrumentalness">{{ 'FORM.MIN' | translate }}</label>
               <input type="number" [ngClass]="{'is-invalid': paramsForm.get('min_instrumentalness').errors && paramsForm.get('min_instrumentalness').touched
                                                           || paramsForm.hasError('instrumentalness') && paramsForm.get('min_instrumentalness').touched}"
                 formControlName="min_instrumentalness"
                   name="limit" id="limit" class="form-control" />
               <div class="invalid-feedback" *ngIf="paramsForm.get('min_instrumentalness').hasError('required') && paramsForm.get('min_instrumentalness').touched">
-                Min Instrumentalness is required.
+                {{ 'FORM.REQUIRED' | translate }}
               </div>
               <div class="invalid-feedback" *ngIf="paramsForm.get('min_instrumentalness').hasError('min') && paramsForm.get('min_instrumentalness').touched">
-                Min Instrumentalness must be at least 0.
+                {{ 'FORM.MIN-ERROR' | translate }}
               </div>
               <div class="invalid-feedback" *ngIf="paramsForm.get('min_instrumentalness').hasError('max') && paramsForm.get('min_instrumentalness').touched">
-                Min Instrumentalness cannot exceed 1.
+                {{ 'FORM.MAX-ERROR' | translate }}
               </div>
               <div class="invalid-feedback" *ngIf="paramsForm.hasError('instrumentalness') && !paramsForm.get('min_instrumentalness').hasError('required')
                                                                                       && !paramsForm.get('max_instrumentalness').hasError('required')">
-                Min Instrumentalness cannot exceed Max Instrumentalness
+                {{ 'FORM.MINMAX-ERROR' | translate }}
               </div>
             </div>
           </div>
           <div class="col-6">
             <div class="form-group">
-              <label for="max_energy">MAX</label>
+              <label for="max_energy">{{ 'FORM.MAX' | translate }}</label>
               <input type="number" [ngClass]="{'is-invalid': paramsForm.get('max_instrumentalness').errors && paramsForm.get('max_instrumentalness').touched
                                                           || paramsForm.hasError('instrumentalness') && paramsForm.get('max_instrumentalness').touched}"
                 formControlName="max_instrumentalness"
                   name="limit" id="limit" class="form-control" />
               <div class="invalid-feedback" *ngIf="paramsForm.get('max_instrumentalness').hasError('required') && paramsForm.get('max_instrumentalness').touched">
-                Max Instrumentalness is required.
+                {{ 'FORM.REQUIRED' | translate }}
               </div>
               <div class="invalid-feedback" *ngIf="paramsForm.get('max_instrumentalness').hasError('min') && paramsForm.get('max_instrumentalness').touched">
-                Max Instrumentalness must be at least 0.
+                {{ 'FORM.MIN-ERROR' | translate }}
               </div>
               <div class="invalid-feedback" *ngIf="paramsForm.get('max_instrumentalness').hasError('max') && paramsForm.get('max_instrumentalness').touched">
-                Max Instrumentalness cannot exceed 1.
+                {{ 'FORM.MAX-ERROR' | translate }}
               </div>
               <div class="invalid-feedback" *ngIf="paramsForm.hasError('instrumentalness') && !paramsForm.get('min_instrumentalness').hasError('required')
                                                                                       && !paramsForm.get('max_instrumentalness').hasError('required')">
-                Min Instrumentalness cannot exceed Max Instrumentalness
+                {{ 'FORM.MINMAX-ERROR' | translate }}
               </div>
             </div>
           </div>
@@ -316,56 +309,55 @@
 
       <fieldset>
         <legend>
-          Liveness (0-1)
+          {{ 'FORM.LIVENESS' | translate }}
           <button type="button" class="btn mb-1" style="background-color:transparent" placement="right"triggers="mouseenter:mouseleave"
-          popoverTitle="Liveness (0-1)"
-          popover="Detects the presence of an audience in the recording. Higher liveness values represent an increased probability that 
-          the track was performed live. A value above 0.8 provides strong likelihood that the track is live.">
+          popoverTitle="{{ 'FORM.LIVENESS' | translate }}"
+          popover="{{ 'FORM.LIVENESS-DESC' | translate }}">
             <i class="fa fa-question-circle"></i>
           </button>
         </legend>
         <div class="row">
           <div class="col-6">
             <div class="form-group">
-              <label for="min_liveness">MIN</label>
+              <label for="min_liveness">{{ 'FORM.MIN' | translate }}</label>
               <input type="number" [ngClass]="{'is-invalid': paramsForm.get('min_liveness').errors && paramsForm.get('min_liveness').touched
                                                           || paramsForm.hasError('liveness') && paramsForm.get('min_liveness').touched}"
                 formControlName="min_liveness"
                   name="limit" id="limit" class="form-control" />
               <div class="invalid-feedback" *ngIf="paramsForm.get('min_liveness').hasError('required') && paramsForm.get('min_liveness').touched">
-                Min Liveness is required.
+                {{ 'FORM.REQUIRED' | translate }}
               </div>
               <div class="invalid-feedback" *ngIf="paramsForm.get('min_liveness').hasError('min') && paramsForm.get('min_liveness').touched">
-                Min Liveness must be at least 0.
+                {{ 'FORM.MIN-ERROR' | translate }}
               </div>
               <div class="invalid-feedback" *ngIf="paramsForm.get('min_liveness').hasError('max') && paramsForm.get('min_liveness').touched">
-                Min Liveness cannot exceed 1.
+                {{ 'FORM.MAX-ERROR' | translate }}
               </div>
               <div class="invalid-feedback" *ngIf="paramsForm.hasError('liveness') && !paramsForm.get('min_liveness').hasError('required')
                                                                                       && !paramsForm.get('max_liveness').hasError('required')">
-                Min Liveness cannot exceed Max Liveness
+                {{ 'FORM.MINMAX-ERROR' | translate }}
               </div>
             </div>
           </div>
           <div class="col-6">
             <div class="form-group">
-              <label for="max_energy">MAX</label>
+              <label for="max_energy">{{ 'FORM.MAX' | translate }}</label>
               <input type="number" [ngClass]="{'is-invalid': paramsForm.get('max_liveness').errors && paramsForm.get('max_liveness').touched
                                                           || paramsForm.hasError('liveness') && paramsForm.get('max_liveness').touched}"
                 formControlName="max_liveness"
                   name="limit" id="limit" class="form-control" />
               <div class="invalid-feedback" *ngIf="paramsForm.get('max_liveness').hasError('required') && paramsForm.get('max_liveness').touched">
-                Max Liveness is required.
+                {{ 'FORM.REQUIRED' | translate }}
               </div>
               <div class="invalid-feedback" *ngIf="paramsForm.get('max_liveness').hasError('min') && paramsForm.get('max_liveness').touched">
-                Max Liveness must be at least 0.
+                {{ 'FORM.MIN-ERROR' | translate }}
               </div>
               <div class="invalid-feedback" *ngIf="paramsForm.get('max_liveness').hasError('max') && paramsForm.get('max_liveness').touched">
-                Max Liveness cannot exceed 1.
+                {{ 'FORM.MAX-ERROR' | translate }}
               </div>
               <div class="invalid-feedback" *ngIf="paramsForm.hasError('liveness') && !paramsForm.get('min_liveness').hasError('required')
                                                                                       && !paramsForm.get('max_liveness').hasError('required')">
-                Min Liveness cannot exceed Max Liveness
+                {{ 'FORM.MINMAX-ERROR' | translate }}
               </div>
             </div>
           </div>
@@ -374,56 +366,55 @@
 
       <fieldset>
         <legend>
-          Popularity (0-100)
+          {{ 'FORM.POPULARITY' | translate }}
           <button type="button" class="btn mb-1" style="background-color:transparent" placement="right"triggers="mouseenter:mouseleave"
-          popoverTitle="Popularity (0-100)"
-          popover="The popularity of the track. The value will be between 0 and 100, with 100 being the most popular. The popularity is 
-          calculated by algorithm and is based, in the most part, on the total number of plays the track has had and how recent those plays are.">
+          popoverTitle="{{ 'FORM.POPULARITY' | translate }}"
+          popover="{{ 'FORM.POPULARITY-DESC' | translate }}">
             <i class="fa fa-question-circle"></i>
           </button>
         </legend>
         <div class="row">
           <div class="col-6">
             <div class="form-group">
-              <label for="min_popularity">MIN</label>
+              <label for="min_popularity">{{ 'FORM.MIN' | translate }}</label>
               <input type="number" [ngClass]="{'is-invalid': paramsForm.get('min_popularity').errors && paramsForm.get('min_popularity').touched
                                                           || paramsForm.hasError('popularity') && paramsForm.get('min_popularity').touched}"
                 formControlName="min_popularity"
                   name="limit" id="limit" class="form-control" />
               <div class="invalid-feedback" *ngIf="paramsForm.get('min_popularity').hasError('required') && paramsForm.get('min_popularity').touched">
-                Min Popularity is required.
+                {{ 'FORM.REQUIRED' | translate }}
               </div>
               <div class="invalid-feedback" *ngIf="paramsForm.get('min_popularity').hasError('min') && paramsForm.get('min_popularity').touched">
-                Min Popularity must be at least 0.
+                {{ 'FORM.MIN-ERROR' | translate }}
               </div>
               <div class="invalid-feedback" *ngIf="paramsForm.get('min_popularity').hasError('max') && paramsForm.get('min_popularity').touched">
-                Min Popularity cannot exceed 1.
+                {{ 'FORM.MAX-ERROR-100' | translate }}
               </div>
               <div class="invalid-feedback" *ngIf="paramsForm.hasError('popularity') && !paramsForm.get('min_popularity').hasError('required')
                                                                                       && !paramsForm.get('max_popularity').hasError('required')">
-                Min Popularity cannot exceed Max Popularity
+                {{ 'FORM.MINMAX-ERROR' | translate }}
               </div>
             </div>
           </div>
           <div class="col-6">
             <div class="form-group">
-              <label for="max_energy">MAX</label>
+              <label for="max_energy">{{ 'FORM.MAX' | translate }}</label>
               <input type="number" [ngClass]="{'is-invalid': paramsForm.get('max_popularity').errors && paramsForm.get('max_popularity').touched
                                                           || paramsForm.hasError('popularity') && paramsForm.get('max_popularity').touched}"
                 formControlName="max_popularity"
                   name="limit" id="limit" class="form-control" />
               <div class="invalid-feedback" *ngIf="paramsForm.get('max_popularity').hasError('required') && paramsForm.get('max_popularity').touched">
-                Max Popularity is required.
+                {{ 'FORM.REQUIRED' | translate }}
               </div>
               <div class="invalid-feedback" *ngIf="paramsForm.get('max_popularity').hasError('min') && paramsForm.get('max_popularity').touched">
-                Max Popularity must be at least 0.
+                {{ 'FORM.MIN-ERROR' | translate }}
               </div>
               <div class="invalid-feedback" *ngIf="paramsForm.get('max_popularity').hasError('max') && paramsForm.get('max_popularity').touched">
-                Max Popularity cannot exceed 100.
+                {{ 'FORM.MAX-ERROR-100' | translate }}
               </div>
               <div class="invalid-feedback" *ngIf="paramsForm.hasError('popularity') && !paramsForm.get('min_popularity').hasError('required')
                                                                                       && !paramsForm.get('max_popularity').hasError('required')">
-                Min Popularity cannot exceed Max Popularity
+                {{ 'FORM.MINMAX-ERROR' | translate }}
               </div>
             </div>
           </div>
@@ -432,58 +423,55 @@
 
       <fieldset>
         <legend>
-          Speechiness (0-1)
+          {{ 'FORM.SPEECHINESS' | translate }}
           <button type="button" class="btn mb-1" style="background-color:transparent" placement="right"triggers="mouseenter:mouseleave"
-          popoverTitle="Speechiness (0-1)"
-          popover="Speechiness detects the presence of spoken words in a track. The more exclusively speech-like the recording (e.g. talk show, 
-          audio book, poetry), the closer to 1.0 the attribute value. Values above 0.66 describe tracks that are probably made entirely of spoken 
-          words. Values between 0.33 and 0.66 describe tracks that may contain both music and speech, either in sections or layered, including such 
-          cases as rap music. Values below 0.33 most likely represent music and other non-speech-like tracks. ">
+          popoverTitle="{{ 'FORM.SPEECHINESS' | translate }}"
+          popover="{{ 'FORM.SPEECHINESS-DESC' | translate }}">
             <i class="fa fa-question-circle"></i>
           </button>
         </legend>
         <div class="row">
           <div class="col-6">
             <div class="form-group">
-              <label for="min_speechiness">MIN</label>
+              <label for="min_speechiness">{{ 'FORM.MIN' | translate }}</label>
               <input type="number" [ngClass]="{'is-invalid': paramsForm.get('min_speechiness').errors && paramsForm.get('min_speechiness').touched
                                                           || paramsForm.hasError('speechiness') && paramsForm.get('min_speechiness').touched}"
                 formControlName="min_speechiness"
                   name="limit" id="limit" class="form-control" />
               <div class="invalid-feedback" *ngIf="paramsForm.get('min_speechiness').hasError('required') && paramsForm.get('min_speechiness').touched">
-                Min Speechiness is required.
+                {{ 'FORM.REQUIRED' | translate }}
               </div>
               <div class="invalid-feedback" *ngIf="paramsForm.get('min_speechiness').hasError('min') && paramsForm.get('min_speechiness').touched">
-                Min Speechiness must be at least 0.
+                {{ 'FORM.MIN-ERROR' | translate }}
               </div>
               <div class="invalid-feedback" *ngIf="paramsForm.get('min_speechiness').hasError('max') && paramsForm.get('min_speechiness').touched">
-                Min Speechiness cannot exceed 1.
+                {{ 'FORM.MAX-ERROR' | translate }}
               </div>
               <div class="invalid-feedback" *ngIf="paramsForm.hasError('speechiness') && !paramsForm.get('min_speechiness').hasError('required')
                                                                                       && !paramsForm.get('max_speechiness').hasError('required')">
-                Min Speechiness cannot exceed Max Speechiness
+                {{ 'FORM.MINMAX-ERROR' | translate }}
               </div>
             </div>
           </div>
           <div class="col-6">
             <div class="form-group">
-              <label for="max_energy">MAX</label>
+              <label for="max_energy">{{ 'FORM.MAX' | translate }}</label>
               <input type="number" [ngClass]="{'is-invalid': paramsForm.get('max_speechiness').errors && paramsForm.get('max_speechiness').touched
                                                           || paramsForm.hasError('speechiness') && paramsForm.get('max_speechiness').touched}"
                 formControlName="max_speechiness"
                   name="limit" id="limit" class="form-control" />
               <div class="invalid-feedback" *ngIf="paramsForm.get('max_speechiness').hasError('required') && paramsForm.get('max_speechiness').touched">
-                Max Speechiness is required.
+                {{ 'FORM.REQUIRED' | translate }}
               </div>
               <div class="invalid-feedback" *ngIf="paramsForm.get('max_speechiness').hasError('min') && paramsForm.get('max_speechiness').touched">
-                Max Speechiness must be at least 0.
+                {{ 'FORM.MIN-ERROR' | translate }}
               </div>
               <div class="invalid-feedback" *ngIf="paramsForm.get('max_speechiness').hasError('max') && paramsForm.get('max_speechiness').touched">
-                Max Speechiness cannot exceed 1.
+                {{ 'FORM.MAX-ERROR' | translate }}
               </div>
               <div class="invalid-feedback" *ngIf="paramsForm.hasError('speechiness') && !paramsForm.get('min_speechiness').hasError('required')
                                                                                       && !paramsForm.get('max_speechiness').hasError('required')">
-                Min Speechiness cannot exceed Max Speechiness
+                {{ 'FORM.MINMAX-ERROR' | translate }}
               </div>
             </div>
           </div>
@@ -492,56 +480,55 @@
 
         <fieldset>
         <legend>
-          Valence (0-1)
+          {{ 'FORM.VALENCE' | translate }}
           <button type="button" class="btn mb-1" style="background-color:transparent" placement="right"triggers="mouseenter:mouseleave"
-          popoverTitle="Valence (0-1)"
-          popover="A measure from 0.0 to 1.0 describing the musical positiveness conveyed by a track. Tracks with high valence sound more 
-          positive (e.g. happy, cheerful, euphoric), while tracks with low valence sound more negative (e.g. sad, depressed, angry).">
+          popoverTitle="{{ 'FORM.VALENCE' | translate }}"
+          popover="{{ 'FORM.VALENCE-DESC' | translate }}">
             <i class="fa fa-question-circle"></i>
           </button>
         </legend>
         <div class="row">
           <div class="col-6">
             <div class="form-group">
-              <label for="min_valence">MIN</label>
+              <label for="min_valence">{{ 'FORM.MIN' | translate }}</label>
               <input type="number" [ngClass]="{'is-invalid': paramsForm.get('min_valence').errors && paramsForm.get('min_valence').touched
                                                           || paramsForm.hasError('valence') && paramsForm.get('min_valence').touched}"
                 formControlName="min_valence"
                   name="limit" id="limit" class="form-control" />
               <div class="invalid-feedback" *ngIf="paramsForm.get('min_valence').hasError('required') && paramsForm.get('min_valence').touched">
-                Min Valence is required.
+                {{ 'FORM.REQUIRED' | translate }}
               </div>
               <div class="invalid-feedback" *ngIf="paramsForm.get('min_valence').hasError('min') && paramsForm.get('min_valence').touched">
-                Min Valence must be at least 0.
+                {{ 'FORM.MIN-ERROR' | translate }}
               </div>
               <div class="invalid-feedback" *ngIf="paramsForm.get('min_valence').hasError('max') && paramsForm.get('min_valence').touched">
-                Min Valence cannot exceed 1.
+                {{ 'FORM.MAX-ERROR' | translate }}
               </div>
               <div class="invalid-feedback" *ngIf="paramsForm.hasError('valence') && !paramsForm.get('min_valence').hasError('required')
                                                                                       && !paramsForm.get('max_valence').hasError('required')">
-                Min Valence cannot exceed Max Valence
+                {{ 'FORM.MINMAX-ERROR' | translate }}
               </div>
             </div>
           </div>
           <div class="col-6">
             <div class="form-group">
-              <label for="max_energy">MAX</label>
+              <label for="max_energy">{{ 'FORM.MAX' | translate }}</label>
               <input type="number" [ngClass]="{'is-invalid': paramsForm.get('max_valence').errors && paramsForm.get('max_valence').touched
                                                           || paramsForm.hasError('valence') && paramsForm.get('max_valence').touched}"
                 formControlName="max_valence"
                   name="limit" id="limit" class="form-control" />
               <div class="invalid-feedback" *ngIf="paramsForm.get('max_valence').hasError('required') && paramsForm.get('max_valence').touched">
-                Max Valence is required.
+                {{ 'FORM.REQUIRED' | translate }}
               </div>
               <div class="invalid-feedback" *ngIf="paramsForm.get('max_valence').hasError('min') && paramsForm.get('max_valence').touched">
-                Max Valence must be at least 0.
+                {{ 'FORM.MIN-ERROR' | translate }}
               </div>
               <div class="invalid-feedback" *ngIf="paramsForm.get('max_valence').hasError('max') && paramsForm.get('max_valence').touched">
-                Max Valence cannot exceed 1.
+                {{ 'FORM.MAX-ERROR' | translate }}
               </div>
               <div class="invalid-feedback" *ngIf="paramsForm.hasError('valence') && !paramsForm.get('min_valence').hasError('required')
                                                                                       && !paramsForm.get('max_valence').hasError('required')">
-                Min Valence cannot exceed Max Valence
+                {{ 'FORM.MINMAX-ERROR' | translate }}
               </div>
             </div>
           </div>
@@ -550,56 +537,55 @@
 
       <fieldset>
         <legend>
-          Tempo (0-220)
+          {{ 'FORM.TEMPO' | translate }}
           <button type="button" class="btn mb-1" style="background-color:transparent" placement="right"triggers="mouseenter:mouseleave"
-          popoverTitle="Tempo (0-220)"
-          popover="The overall estimated tempo of a track in beats per minute (BPM). In musical terminology, tempo is the speed or pace 
-          of a given piece and derives directly from the average beat duration.">
+          popoverTitle="{{ 'FORM.TEMPO' | translate }}"
+          popover="{{ 'FORM.TEMPO-DESC' | translate }}">
             <i class="fa fa-question-circle"></i>
           </button>
         </legend>
         <div class="row">
           <div class="col-6">
             <div class="form-group">
-              <label for="min_tempo">MIN</label>
+              <label for="min_tempo">{{ 'FORM.MIN' | translate }}</label>
               <input type="number" [ngClass]="{'is-invalid': paramsForm.get('min_tempo').errors && paramsForm.get('min_tempo').touched
                                                           || paramsForm.hasError('tempo') && paramsForm.get('min_tempo').touched}"
                 formControlName="min_tempo"
                   name="limit" id="limit" class="form-control" />
               <div class="invalid-feedback" *ngIf="paramsForm.get('min_tempo').hasError('required') && paramsForm.get('min_tempo').touched">
-                Min Tempo is required.
+                {{ 'FORM.REQUIRED' | translate }}
               </div>
               <div class="invalid-feedback" *ngIf="paramsForm.get('min_tempo').hasError('min') && paramsForm.get('min_tempo').touched">
-                Min Tempo must be at least 0.
+                {{ 'FORM.MIN-ERROR' | translate }}
               </div>
               <div class="invalid-feedback" *ngIf="paramsForm.get('min_tempo').hasError('max') && paramsForm.get('min_tempo').touched">
-                Min Tempo cannot exceed 1.
+                {{ 'FORM.MAX-ERROR-220' | translate }}
               </div>
               <div class="invalid-feedback" *ngIf="paramsForm.hasError('tempo') && !paramsForm.get('min_tempo').hasError('required')
                                                                                       && !paramsForm.get('max_tempo').hasError('required')">
-                Min Tempo cannot exceed Max Tempo
+                {{ 'FORM.MINMAX-ERROR' | translate }}
               </div>
             </div>
           </div>
           <div class="col-6">
             <div class="form-group">
-              <label for="max_energy">MAX</label>
+              <label for="max_energy">{{ 'FORM.MAX' | translate }}</label>
               <input type="number" [ngClass]="{'is-invalid': paramsForm.get('max_tempo').errors && paramsForm.get('max_tempo').touched
                                                           || paramsForm.hasError('tempo') && paramsForm.get('max_tempo').touched}"
                 formControlName="max_tempo"
                   name="limit" id="limit" class="form-control" />
               <div class="invalid-feedback" *ngIf="paramsForm.get('max_tempo').hasError('required') && paramsForm.get('max_tempo').touched">
-                Max Tempo is required.
+                {{ 'FORM.REQUIRED' | translate }}
               </div>
               <div class="invalid-feedback" *ngIf="paramsForm.get('max_tempo').hasError('min') && paramsForm.get('max_tempo').touched">
-                Max Tempo must be at least 0.
+                {{ 'FORM.MIN-ERROR' | translate }}
               </div>
               <div class="invalid-feedback" *ngIf="paramsForm.get('max_tempo').hasError('max') && paramsForm.get('max_tempo').touched">
-                Max Tempo cannot exceed 1.
+                {{ 'FORM.MAX-ERROR-220' | translate }}
               </div>
               <div class="invalid-feedback" *ngIf="paramsForm.hasError('tempo') && !paramsForm.get('min_tempo').hasError('required')
                                                                                       && !paramsForm.get('max_tempo').hasError('required')">
-                Min Tempo cannot exceed Max Tempo
+                {{ 'FORM.MINMAX-ERROR' | translate }}
               </div>
             </div>
           </div>
@@ -609,29 +595,29 @@
       <div class="form-group text-center mt-3 row">
         <div class="col-12 text-sm-center text-md-right col-md-6 mt-2">
           <button type="submit" [disabled]="!paramsForm.valid || clicked()" class="btn btn-success btn-lg btn-wide">
-            <ng-container *ngIf="clicked()"><i class="fa fa-circle-o-notch fa-spin fa-fw"></i> Loading</ng-container>
-            <ng-container *ngIf="!clicked()"><i class="fa fa-check"></i> Generate</ng-container>
+            <ng-container *ngIf="clicked()"><i class="fa fa-circle-o-notch fa-spin fa-fw"></i> {{ 'FORM.LOADING' | translate }}</ng-container>
+            <ng-container *ngIf="!clicked()"><i class="fa fa-check"></i> {{ 'FORM.GENERATE' | translate }}</ng-container>
           </button>
         </div>
         <div class="col-12 col-md-6 text-sm-center text-md-left mt-2">
-          <button type="button" (click)="generateForm()" class="btn btn-danger btn-lg btn-wide"><i class="fa fa-undo"></i> Reset</button>
+          <button type="button" (click)="generateForm()" class="btn btn-danger btn-lg btn-wide"><i class="fa fa-undo"></i> {{ 'FORM.RESET' | translate }}</button>
         </div>
       </div>
     </form>
   </div>
 
   <div *ngIf="sended()" class="container">
-    <h1 class="text-center">Your Playlist:</h1>
+    <h1 class="text-center">{{ 'PLAYLIST.H1' | translate }}</h1>
     <div class="table-responsive mt-3">
       <table class="table table-striped text-center">
         <thead>
           <tr>
             <th scope="col"></th>
-            <th scope="col">Name</th>
-            <th scope="col">Artists</th>
-            <th scope="col">Album</th>
-            <th scope="col">Year</th>
-            <th scope="col">Duration</th>
+            <th scope="col">{{ 'PLAYLIST.NAME' | translate }}</th>
+            <th scope="col">{{ 'PLAYLIST.ARTISTS' | translate }}</th>
+            <th scope="col">{{ 'PLAYLIST.ALBUM' | translate }}</th>
+            <th scope="col">{{ 'PLAYLIST.YEAR' | translate }}</th>
+            <th scope="col">{{ 'PLAYLIST.DURATION' | translate }}</th>
           </tr>
         </thead>
         <tbody>
@@ -649,13 +635,19 @@
 
     <div class="form-group text-center mt-3 row">
       <div class="col-12 text-sm-center text-md-right col-lg-4 mt-2">
-        <button type="button" (click)="goBackToForm()" class="btn btn-lg btn-dark btn-wide"><i class="fa fa-chevron-left"></i> Go Back</button>
+        <button type="button" (click)="goBackToForm()" class="btn btn-lg btn-dark btn-wide">
+          <i class="fa fa-chevron-left"></i> {{ 'PLAYLIST.GO-BACK' | translate }}
+        </button>
       </div>
       <div class="col-12 text-center col-lg-4 mt-2">
-        <button type="button" (click)="addToSpotify()" class="btn btn-success btn-lg btn-wide"><i class="fa fa-plus"></i> Add to Spotify</button>
+        <button type="button" (click)="addToSpotify()" class="btn btn-success btn-lg btn-wide">
+          <i class="fa fa-plus"></i> {{ 'PLAYLIST.ADD-TO-SPOTIFY' | translate }}
+        </button>
       </div>
       <div class="col-12 text-sm-center text-md-left col-lg-4 mt-2">
-        <button type="button" (click)="startOver()" class="btn btn-danger btn-lg btn-wide"><i class="fa fa-undo"></i> Start Over</button>
+        <button type="button" (click)="startOver()" class="btn btn-danger btn-lg btn-wide">
+          <i class="fa fa-undo"></i> {{ 'PLAYLIST.START-OVER' | translate }}
+        </button>
       </div>
     </div>
 

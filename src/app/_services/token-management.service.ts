@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { NotificationService } from './notification.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TokenManagementService {
 
-  constructor(private router: Router, private notification: NotificationService) { }
+  constructor(private router: Router, private notification: NotificationService, private translate: TranslateService) { }
 
   saveToken(token: string, expires: string){
     localStorage.setItem('access-token', token);
@@ -43,8 +44,10 @@ export class TokenManagementService {
     this.deleteTokenIfExpired();
 
     if(!this.exists()){
-      this.notification.error('You have to connect your account!');
-      this.router.navigate(['/']);
+      this.translate.get('TOKEN.DISCONNECTED').subscribe((res: string) => {
+        this.notification.error(res);
+        this.router.navigate(['/']);
+      });
     }
   }
 }
