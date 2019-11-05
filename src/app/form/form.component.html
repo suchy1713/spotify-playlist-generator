@@ -1,6 +1,6 @@
 <div class="container" id="body">
   <div class="container" *ngIf="!sended()">
-    <h2 class="text-center">Generate your playlist!</h2>
+    <h1 class="text-center">Generate your playlist!</h1>
     <form [formGroup]="paramsForm" (ngSubmit)="sendForm()">
 
       <fieldset>
@@ -621,7 +621,7 @@
   </div>
 
   <div *ngIf="sended()" class="container">
-    <h2 class="text-center">Your playlist:</h2>
+    <h1 class="text-center">Your Playlist:</h1>
     <div class="table-responsive mt-3">
       <table class="table table-striped text-center">
         <thead>

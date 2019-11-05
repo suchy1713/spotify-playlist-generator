@@ -1,5 +1,5 @@
 @import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
-@import '../node_modules/bootswatch/dist/simplex/bootstrap.min.css';
+@import '../node_modules/bootswatch/dist/yeti/bootstrap.min.css';
 @import '../node_modules/font-awesome/css/font-awesome.css';
 @import '../node_modules/alertifyjs/build/css/alertify.min.css';
 @import '../node_modules/alertifyjs/build/css/themes/bootstrap.min.css';
@@ -46,6 +46,7 @@ fieldset {
 .btn-huge {
     width: 500px;
     height: 100px;
+    font-size: 25px;
 }
 
 @media (max-width: 550px) {
