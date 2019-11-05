@@ -2,7 +2,7 @@
     "MAIN": {
         "TITLE": "Spotify Playlist Generator",
         "APP-DESC-TITLE": "How does it work?",
-        "APP-DESC": "Spotify allows developers to access audio features (e.g. danceability, energy, valence, tempo) for every track. Unfortunately, making any use of them was too complicated for regular users. Until now. This app will let you generate playlists based on those features and add them to your Spotify with one click. Simple as that! Just connect your account and proceed to the form.",
+        "APP-DESC": "Did you know that Spotify shares audio features (e. g. danceability, energy, tempo) for every track? Unfortunately, they weren't easily accessible to regular users. Until now! This app will let you generate unique playlists based on those features and add them to your Spotify with one click. Simple as that! Just connect your account and proceed to the form.",
         "STEP-ONE": "1. Connect your account",
         "STEP-TWO": "2. Generate playlist"
     },
