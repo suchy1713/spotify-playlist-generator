@@ -6,6 +6,7 @@ import { NotificationService } from '../_services/notification.service';
 import { User } from '../_models/user';
 import { Playlist } from '../_models/playlist';
 import { returnedPlaylist } from '../_models/returnedPlaylist';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-form',
@@ -21,15 +22,30 @@ export class FormComponent implements OnInit {
 
   songs: returnedPlaylist;
 
-  constructor(private fb: FormBuilder, private apiAccessService: ApiAccessService, private token: TokenManagementService, private notification: NotificationService) {
+  constructor(private fb: FormBuilder, private apiAccessService: ApiAccessService, private token: TokenManagementService, 
+              private notification: NotificationService, private title: Title) {
    }
 
   ngOnInit() {
+    this.setTitle();
     this.token.throwOutUser();
     window.scrollTo(0, 0);
     this.generated = false;
     this.clickedOnGenerate = false;
     this.generateForm();
+  }
+
+  setTitle(){
+    this.title.setTitle('Generate Playlist');
+  }
+
+  switchTitle(){
+    if(this.title.getTitle() == 'Generate Playlist'){
+      this.title.setTitle('Your Playlist');
+    }
+    else{
+      this.title.setTitle('Generate Playlist');
+    }
   }
 
   generateForm(){
@@ -114,6 +130,7 @@ export class FormComponent implements OnInit {
     this.apiAccessService.GetSongs(this.paramsForm.value).subscribe((songs: any) => {
       this.songs = songs;
       this.generated = true;
+      this.switchTitle();
       window.scrollTo(0, 0);
     }, error => {
       this.notification.error('Something went wrong. Try again.');
@@ -132,6 +149,7 @@ export class FormComponent implements OnInit {
   goBackToForm(){
     this.generated = false;
     this.clickedOnGenerate = false;
+    this.switchTitle();
     window.scrollTo(0, 0);
   }
 

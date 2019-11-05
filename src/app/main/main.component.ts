@@ -3,6 +3,7 @@ import { ApiAccessService } from '../_services/api-access.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TokenManagementService } from '../_services/token-management.service';
 import { NotificationService } from '../_services/notification.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-main',
@@ -11,11 +12,17 @@ import { NotificationService } from '../_services/notification.service';
 })
 export class MainComponent implements OnInit {
 
-  constructor(private apiAccessService: ApiAccessService, private route: ActivatedRoute, private token: TokenManagementService, private router: Router, private notification: NotificationService) { }
+  constructor(private apiAccessService: ApiAccessService, private route: ActivatedRoute, private token: TokenManagementService, private router: Router, 
+              private notification: NotificationService, private title: Title) { }
 
   ngOnInit() {
+    this.setTitle();
     this.token.deleteTokenIfExpired();
     this.retrieveToken();
+  }
+
+  setTitle() {
+    this.title.setTitle('Spotify Playlist Generator');
   }
 
   connect(){
