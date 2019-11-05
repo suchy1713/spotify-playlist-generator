@@ -22,6 +22,13 @@ export class ApiAccessService {
 
   constructor(private http: HttpClient, private router: Router, private urlSerializer: UrlSerializer, private datepipe: DatePipe) { }
 
+  UpdateHeaders(){
+    this.headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + localStorage.getItem('access-token') });
+    this.options = { headers: this.headers };  
+  }
+
   GetAccessToken(url: any){
     var params = {
       client_id: this.clientId,
@@ -37,6 +44,8 @@ export class ApiAccessService {
   }
 
   GetSongs(params: any): Observable<returnedPlaylist>{
+    this.UpdateHeaders();
+
     var tree = this.router.createUrlTree([], { queryParams: params });
     var queryString = this.urlSerializer.serialize(tree).substring('/generate'.length);
 
