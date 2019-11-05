@@ -35,7 +35,8 @@ export class ApiAccessService {
       client_id: this.clientId,
       response_type: 'token',
       redirect_uri: environment.redirectUrl,
-      scope: 'playlist-modify-public'
+      scope: 'playlist-modify-public',
+      show_dialog: 'true'
     }
 
     var tree = this.router.createUrlTree([], { queryParams: params });
