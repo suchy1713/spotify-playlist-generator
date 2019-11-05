@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  redirectUrl: 'https://localhost:4200'
+  redirectUrl: 'https://localhost:4200/'
 };
 
 /*

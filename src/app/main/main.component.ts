@@ -19,7 +19,7 @@ export class MainComponent implements OnInit {
   }
 
   connect(){
-    this.apiAccessService.GetAccessToken(window.location.href);
+    this.apiAccessService.GetAccessToken();
   }
 
   retrieveToken(){

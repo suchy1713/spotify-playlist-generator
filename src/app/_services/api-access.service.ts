@@ -6,6 +6,7 @@ import { returnedPlaylist } from '../_models/returnedPlaylist';
 import { User } from '../_models/user';
 import { Playlist } from '../_models/playlist';
 import { DatePipe } from '@angular/common';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -29,11 +30,11 @@ export class ApiAccessService {
     this.options = { headers: this.headers };  
   }
 
-  GetAccessToken(url: any){
+  GetAccessToken(){
     var params = {
       client_id: this.clientId,
       response_type: 'token',
-      redirect_uri: url,
+      redirect_uri: environment.redirectUrl,
       scope: 'playlist-modify-public'
     }
 
